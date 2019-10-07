@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+}
+
+.row, .col {
+  display: grid;
+  grid-gap: 1em;
+  border: 1px solid black;
+}
+
+.row {
+  grid-auto-flow: column;
+}
+
+.col {
+  grid-auto-flow: row;
+}
