@@ -6,3 +6,7 @@ This folder is dedicated to a fast and easy Vim config. Steps to get everything 
 3. Open Vim, and run `:PlugInstall` to install the default packages found in `.vimrc` with Plug. 
 
 Additionally, my personal setup maps Caps-Lock -> Esc key for easier switching between Vim modes. This setup may vary across systems.
+
+## VimPlug Usage
+- Plugins can installed within Vim using `:PlugInstall`
+- Plugins can be updated within Vim using `:PlugUpdate`
