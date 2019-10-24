@@ -12,4 +12,4 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 
 # add Gilles snippets
-cp tex.snippets ~/.vim/bundle/vim-snippets/UltiSnips/
+cp tex.snippets ~/.vim/UltiSnips/
