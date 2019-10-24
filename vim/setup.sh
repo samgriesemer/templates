@@ -5,11 +5,9 @@ cp .vimrc ~/
 mkdir -p ~/.vim/colors/
 cp solarized.vim ~/.vim/colors/
 
-# install vundle
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-# install vundle plugins
-vim +PluginInstall +qall
+# install plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # add Gilles snippets
-cp tex.snippets ~/.vim/bundle/vim-snippets/UltiSnips/
+cp tex.snippets ~/.vim/plugged/vim-snippets/UltiSnips/
