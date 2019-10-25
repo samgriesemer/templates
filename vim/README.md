@@ -10,3 +10,6 @@ Additionally, my personal setup maps Caps-Lock -> Esc key for easier switching b
 ## VimPlug Usage
 - Plugins can installed within Vim using `:PlugInstall`
 - Plugins can be updated within Vim using `:PlugUpdate`
+
+## MacVim
+If on Mac and you would like the conceal feature (along with yanking to clipboard!), install MacVim via Homebrew `brew install macvim`. To replace normal Vim with MacVim, run `alias vim='/usr/local/Cellar/macvim/8.1-159/MacVim.app/Contents/bin/mvim -v'` (make sure `zsh` is also updated).
