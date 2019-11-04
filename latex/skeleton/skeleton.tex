@@ -12,6 +12,8 @@
 
 % packages
 \usepackage{url}
+\usepackage{multirow}
+\usepackage{array}
 \usepackage{booktabs}
 \usepackage{microtype}
 \usepackage{caption}
@@ -31,6 +33,8 @@
 %\usepackage{minted}
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
 
 % plotting 
 \usepackage{pgfplots}
@@ -85,6 +89,51 @@ $$\floor{x+y}$$
 
 \subsubsection{Vector modifier}
 $$c\vec{X} + d\vec{y}$$
+
+\subsection{Diagrams}
+\subsubsection{Small Tables}
+\begin{table}[H]
+  \centering
+    \hspace*{-4em}\begin{tabular}{*{6}{c|}}
+      \multicolumn{2}{c}{} & \multicolumn{4}{c}{Player LJ} \\
+      \cline{3-6}
+      \multicolumn{1}{c}{} & & {(w,w)} & {(w,c)} & {(c,w)} & {(c,c)} \\
+      \cline{2-6}
+      \multirow{2}{*}{Player BJ} & w & 0,0 & 0,0 & \color{red}9,1 & \color{red}9,1 \\
+      \cline{2-6}
+      & c & \color{red}4,4 & 5,3 & 4,4 & 5,3 \\
+      \cline{2-6}
+    \end{tabular}
+    \caption{Normal form representation}
+\end{table}
+
+\subsubsection{Trees}
+\begin{center}
+\begin{tikzpicture}[
+  thin,
+  scale=1.2,
+  edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
+  level distance=50pt,
+  level 3/.style={sibling distance=20pt}
+]
+  \Tree [ .\textbf{Apple}
+          \edge node[auto=right] {\textit{\scriptsize Initiate lawsuit (I)}};
+          [ .\textbf{Orange}
+            \edge node[auto=right] {\textit{\scriptsize Settle for $s$ (S)}};
+            [ .{Outcome A} ]
+            \edge node[auto=left] {\textit{\scriptsize Don't settle (DS)}};
+            [ .\textbf{Apple}
+              \edge node[auto=right] {\textit{\scriptsize Pursue trial (T)}};
+              [ .{Outcome B} ]
+              \edge node[auto=left] {\textit{\scriptsize Drop trial (DT)}};
+              [ .{Outcome C} ]
+            ]
+          ]
+          \edge node[auto=left] {\textit{\scriptsize Don't initiate lawsuit (DI)}};
+          [ .{Outcome D} ]
+        ]
+\end{tikzpicture}
+\end{center}
 
 \section{Document improvements}
 \subsection{Lists}
