@@ -2,10 +2,14 @@
 set shell=/bin/bash
 set mouse=nicr
 set number
+set tabstop=2
+set shiftwidth=2
+set expandtab
 set background=dark
 set conceallevel=1
 syntax enable
-colorscheme solarized
+"colorscheme solarized
+colorscheme gruvbox
 setlocal spell
 set spelllang=en_us
 
@@ -20,7 +24,13 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
 
 "" TeX-conceal ""
-Plug 'KeitaNakamura/tex-conceal.vim'
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+
+"" NERDTree ""
+Plug 'scrooloose/nerdtree'
+
+"" GruvBox Color Scheme "'
+Plug 'morhetz/gruvbox'
 
 " end plugin list, initialize system
 call plug#end()
@@ -39,3 +49,7 @@ let g:vimtex_quickfix_mode=0
 
 "" TeX-conceal configuration ""
 let g:tex_conceal='abdmg'
+
+"" NERDTree config ""
+let NERDTreeMinimalUI=1
+
