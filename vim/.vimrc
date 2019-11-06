@@ -29,7 +29,10 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 "" NERDTree ""
 Plug 'scrooloose/nerdtree'
 
-"" GruvBox Color Scheme "'
+"" Solarize color scheme ""
+Plug 'altercation/vim-colors-solarized'
+
+"" GruvBox color scheme "'
 Plug 'morhetz/gruvbox'
 
 " end plugin list, initialize system
