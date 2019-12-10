@@ -4,8 +4,9 @@
 
 % fonts
 \usepackage[T1]{fontenc}
-\usepackage[osf]{libertine}
-\usepackage[scaled=0.8]{beramono}
+\usepackage{kpfonts}
+%\usepackage[osf]{libertine}
+%\usepackage[scaled=0.8]{beramono}
 
 % packages
 \usepackage{url}
@@ -14,6 +15,7 @@
 \usepackage{booktabs}
 \usepackage{microtype}
 \usepackage{caption}
+\usepackage{subcaption}
 \usepackage{float}
 \usepackage{stmaryrd}
 \usepackage[shortlabels]{enumitem}
@@ -24,6 +26,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{bm}
 \usepackage{graphicx}
 \usepackage{mathtools}
 \usepackage{nicefrac}
@@ -49,6 +52,8 @@
     tick style={semithick, black}
   }
 }
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{dateplot}
 
 % custom math operators
 \DeclareMathOperator*{\argmin}{\arg\!\min}
