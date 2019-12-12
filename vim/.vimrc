@@ -26,8 +26,15 @@ Plug 'lervag/vimtex'
 "" TeX-conceal ""
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 
+"" Extra TeX snips ""
+Plug 'gillescastel/latex-snippets'
+
 "" NERDTree ""
 Plug 'scrooloose/nerdtree'
+
+"" Airline ""
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 "" Solarize color scheme ""
 Plug 'altercation/vim-colors-solarized'
@@ -47,7 +54,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 "" VimTex configuration ""
 let g:tex_flavor='latex'
-let g:vimtex_view_method='skim'
+let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 
 "" TeX-conceal configuration ""
