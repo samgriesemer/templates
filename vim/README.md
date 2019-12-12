@@ -7,7 +7,7 @@ This folder is dedicated to a fast and easy Vim config for my personal settings.
 And that's it! From here you can customize plugins, color schemes, etc to your liking in your `.vimrc`. The packages and color schemes that are installed by default are listed below.
 
 ## Default Packages
-* (UltiSnips)[] (vim snippet engine)
+* (UltiSnips)[https://github.com/SirVer/ultisnips] (vim snippet engine)
 * Vim-snippets (snippet library)
 * VimTeX (basic TeX support)
 * Vim-LaTeX-Live (live LaTeX preview)
