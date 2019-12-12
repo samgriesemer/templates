@@ -9,7 +9,7 @@ set background=dark
 set conceallevel=1
 syntax enable
 "colorscheme solarized
-colorscheme gruvbox
+"colorscheme gruvbox
 setlocal spell
 set spelllang=en_us
 
