@@ -7,17 +7,18 @@ This folder is dedicated to a fast and easy Vim config for my personal settings.
 And that's it! From here you can customize plugins, color schemes, etc to your liking in your `.vimrc`. The packages and color schemes that are installed by default are listed below.
 
 ## Default Packages
-* (UltiSnips)[https://github.com/SirVer/ultisnips] (vim snippet engine)
-* Vim-snippets (snippet library)
-* VimTeX (basic TeX support)
-* Vim-LaTeX-Live (live LaTeX preview)
-* TeX-conceal (adds support vim conceal for TeX)
-* NERDTree (file system explorer)
-* Airline (light statusline)
+* [UltiSnips](https://github.com/SirVer/ultisnips) (vim snippet engine)
+* [vim-snippets](https://github.com/honza/vim-snippets) (snippet library)
+* [vimtex](https://github.com/lervag/vimtex) (basic TeX support)
+* [vim-latex-live](https://github.com/xuhdev/vim-latex-live-preview) (live LaTeX preview)
+* [tex-conceal](https://github.com/KeitaNakamura/tex-conceal.vim) (adds support vim conceal for TeX)
+* [latex-snippets](https://github.com/gillescastel/latex-snippets) (additional TeX snippets)
+* [NERDTree](https://github.com/scrooloose/nerdtree) (file system explorer)
+* [Airline](https://github.com/vim-airline/vim-airline) (light statusline)
 
 ## Default Color Schemes
-* Solarized
-* GruvBox
+* [Solarized](https://github.com/altercation/vim-colors-solarized)
+* [GruvBox](https://github.com/morhetz/gruvbox)
 
 ## Additional Notes
 ### Basic VimPlug Usage
