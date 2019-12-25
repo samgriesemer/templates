@@ -2,7 +2,7 @@
 This folder is dedicated to a fast and easy Vim config for my personal settings. Steps to get everything up and running:
 
 1. `cd` into this folder. The setup script makes references to local files.
-2. Execute `bash setup.sh`. This will take care of a few basic things automatically, such as moving the `.vimrc` into your home directory, installing the Plug package manager and default plugings, moving installed color scheme files to the vim colors folder, and setting up additional snippets.
+2. Execute `bash setup.sh`. This will take care of a few basic things automatically, such as moving the `.vimrc` into your home directory, installing the Plug package manager and default plugins, moving installed color scheme files to the vim colors folder, and setting up additional snippets.
 
 And that's it! From here you can customize plugins, color schemes, etc to your liking in your `.vimrc`. The packages and color schemes that are installed by default are listed below.
 
