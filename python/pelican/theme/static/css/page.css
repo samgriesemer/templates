@@ -1,0 +1,136 @@
+/***********/
+/* GENERAL */
+/***********/
+/* add body margin, grid layout */
+body {
+    margin: auto;
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 4em 1fr 4em;
+    max-width: 56rem;
+    padding: 0 1em;
+}
+
+.row, .col {
+  display: grid;
+  grid-gap: 1em;
+}
+
+.row {
+  grid-auto-flow: column;
+}
+
+.col {
+  grid-auto-flow: row;
+}
+
+/**********/
+/* HEADER */
+/**********/
+body > header {
+    position: relative;
+    border-bottom: 1px dotted black;
+}
+
+/* centering header elements */
+body > header > *, body > footer > * {
+    margin: 0;
+    padding: 0;
+    top: 50%;
+    position: absolute;
+    transform: translateY(-50%);
+}
+
+/* shift header right */
+nav {
+    right: 0;
+}
+
+/* nav link spacing */
+nav > a {
+    margin-left: 1.5em;
+}
+
+/**********/
+/* FOOTER */
+/**********/
+body > footer {
+    position: relative;
+}
+
+/************/
+/* HEADINGS */
+/************/
+#content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
+    /*margin: 0.3em 0;*/
+    margin: 0;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin: 0.3em 0;
+}
+
+hr {
+    position: relative;
+    display: block;
+    margin: 0;
+    margin-bottom: 0.3em;
+    padding: 0;
+    height: 1px;
+    border: 0;
+    border-top: 1px dotted rgba(0,0,0,1.0);
+}
+
+/*******/
+/* TOC */
+/*******/
+.toc {
+    border: 4px double;
+    display: inline-block;
+    padding: 1em;
+    background: #0000000a;
+    margin: 0em 2em 2em 0;
+    float: left;
+    max-width: 25%;
+}
+
+.toc ul {
+    list-style-type: decimal;
+    margin: 0;
+}
+
+.toc > ul {
+    list-style-position: inside;
+    padding: 0;
+}
+
+/************/
+/* ABSTRACT */
+/************/
+#abstract {
+    border: 4px double;
+    background-color: #0000000a;
+    padding: 1em;
+    display: flex;
+    margin-bottom: 1.5em;
+}
+
+#abstract > p {
+    margin: 0;
+}
+
+/************/
+/* METADATA */
+/************/
+#metadata {
+    margin-bottom: 1.5em;
+}
+
+/**********/
+/* IMAGES */
+/**********/
+#content img {
+    display: block;
+    margin: 1.5em auto;
+}

@@ -1,0 +1,6 @@
+<a href='/' id='logo'>Wiki</a>
+<nav>
+    {% for title, link in MENUITEMS %}
+        <a href="{{ link }}">{{ title }}</a>
+    {% endfor %}
+</nav>
