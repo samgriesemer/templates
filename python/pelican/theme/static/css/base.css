@@ -1,0 +1,272 @@
+/***********/
+/* GENERAL */
+/***********/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'SSP', monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* overwrite browser h1 small */
+h1 {
+    font-size: 2em;
+}
+
+/* selection highlight color */
+::selection {
+    background: #fffc01; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+    background: #fffc01; /* Gecko Browsers */
+}
+
+/* global modifiers */
+.hl {
+  color: #003CFF;
+}
+
+.grey {
+  color: grey;
+}
+
+.lt {
+  opacity: 0.5;
+}
+
+.line {
+  border-top: 1px solid;
+  padding: 1em 0;
+}
+
+.big {
+    font-size: 3em;
+}
+
+.title {
+    font-size: 5em;
+}
+
+/*************/
+/* DARK MODE */
+/*************/
+@media (prefers-color-scheme: dark) {
+    html {
+        filter: invert(1);
+        background-color: black;
+    }
+}
+
+/*********/
+/* LISTS */
+/*********/
+ul, ol {
+    /*margin: 0;
+    padding: 0;
+    list-style-type: square;
+    list-style-position: inside;*/
+    overflow: hidden;
+}
+
+ul ul {
+    padding-left: 2em;
+}
+
+/**********/
+/* TABLES */
+/**********/
+table {
+  border-collapse: collapse;
+  border: solid black;
+  border-width: 2px 0;
+  font-size: 0.65em;
+  font-variant-numeric: tabular-nums;
+}
+
+table tr {
+
+}
+
+table tr:hover {
+    /*border: dotted black;*/
+    /*border-width: 1px 0;*/
+    outline: 1px dotted black;
+}
+
+table th, table td {
+    padding: 0.6em 0.8em;
+    line-height: 1.5em;
+}
+
+table th {
+    border-bottom: 1px solid black;
+}
+
+table td {
+
+}
+
+/* Display table */
+.dtable {
+    font-size: 1em;
+    border: 0;
+}
+
+.dtable #head {
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 1em;
+}
+
+.dtable .row {
+    /* set left index width*/
+    grid-template-columns: 0.2fr;
+
+    /* evenly split remaining space in implicit grid */
+    grid-auto-columns: 1fr;
+}
+
+.dtable .row:hover {
+    opacity: 0.7;
+}
+
+/*********/
+/* LINKS */
+/*********/
+a {
+    /*width: calc(100%);
+    background: linear-gradient(transparent 65%, #fffc01 4px) left;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: background-size 0.4s;*/
+}
+
+a:hover {
+    /*background-size: 100% 100% !important;*/
+}
+
+a:any-link {
+    color: #000;
+    text-decoration: none;
+}
+
+a:any-link:hover {
+    text-decoration: underline;
+}
+
+/***********/
+/* SLIDERS */
+/***********/
+input[type=range] {
+    -webkit-appearance: none;
+    margin: 10px 0;
+    vertical-align: middle;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    height: 1px;
+    background: #000;
+    border: 0px solid #000;
+}
+
+input[type=range]::-moz-range-track {
+    height: 1px;
+    background: #000;
+    border: 0px solid #000;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px #000;
+    border: 0px solid #000;
+    height: 9px;
+    width: 9px;
+    /*border-radius: 25px;*/
+    background: #000;
+    -webkit-appearance: none;
+    margin-top: -4px;
+}
+
+input[type=range]::-moz-range-thumb {
+    box-shadow: 0px 0px 0px #000;
+    border: 0px solid #000;
+    height: 9px;
+    width: 9px;
+    border-radius: 0px;
+    background: #000;
+    -moz-appearance: none;
+    margin-top: -4px;
+}
+
+/***********/
+/* BUTTONS */
+/***********/
+button {
+    border-radius: 2px;
+    color: #000;
+    font-size: 10px;
+    background: #fff;
+    padding: 3px 6px;
+    border: solid #000 1px;
+    text-decoration: none;
+    transition: 0.5s;
+    box-shadow: 0;
+    text-shadow: 0;
+    background-image: none;
+}
+
+button:hover {
+    background: #000;
+    color: #fff;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+/**********/
+/* SELECT */
+/**********/
+select {
+    background-color: white;
+    border: 1px solid black;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-position: right 50%;
+    background-repeat: no-repeat;
+    background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1"><path d="M4 8L0 4h8z"/></svg>');
+    border-radius: 2px;
+    padding: 0.1em 1.5em 0.36em 0.5em;
+}
+
+/*********/
+/* INPUT */
+/*********/
+input {
+    border-radius: 2px;
+    padding: 0.2em 0.4em;
+}
+
+/********/
+/* CODE */
+/********/
+code {
+    font-family: 'SCP';
+    padding: 0 5px 2px;
+    font-size: 0.8em;
+    background: #0000000a;
+    border-radius: 3px;
+}
+
+pre {
+    overflow-x: auto;
+    margin: 1.5em 0;
+    line-height: 1.5em;
+    padding: 1.5em;
+    max-width: 100%;
+    background: #0000000a;
+    border-radius: 5px;
+}

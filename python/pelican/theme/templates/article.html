@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{# delayed from base to use `article` object #}
+{% block title %}
+    {{ article.title }} - {{ SITENAME }}
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="/static/css/page.css">
+
+    <!-- KaTeX settings -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.css" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+    <style>.katex { font-size: 1em } .katex-display > .katex { white-space: normal !important; }</style>
+{% endblock %}
+
+{# main site header #}
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{# additional meta tags #}
+{% block meta %}
+    {% if article.description %}
+        <meta name="description" content="{{ article.description }}" />
+    {% endif %}
+    {% for tag in article.tags %}
+        <meta name="tags" content="{{ tag }}" />
+    {% endfor %}
+{% endblock %}
+
+{# write main page content as single article #}
+{% block main %}
+    {# primary article, contains all components needed for standalone article #}
+    <article>
+        {# title and metadata heading the article (may consider metadata out of header at some point) #}
+        <header>
+            <h1>{{ article.title }}</h1>
+            <i>{{ article.summary }}</i>
+
+            <section id='metadata'>
+                <time class="published" datetime="{{ article.date.isoformat() }}">
+                  Created: {{ article.locale_date }}
+                </time>
+
+                {% if article.modified %}
+                <time class="modified" datetime="{{ article.modified.isoformat() }}">
+                  Modified: {{ article.locale_modified }}
+                </time>
+                {% endif %}
+
+                {#{% if article.authors %}
+                <address class="author">
+                  By {% for author in article.authors %}
+                      <a class="url fn" href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
+                    {% endfor %}
+                </address>
+                {% endif %}#}
+
+                {% if article.category %}
+                <div class="category">
+                    Category: <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+                </div>
+                {% endif %}
+
+                {% if article.tags %}
+                <div class="tags">
+                    Tags:
+                    {% for tag in article.tags %}
+                        <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </section>
+        </header>
+
+        {# article content, specifically headings, paragraphs, figures, etc for content only #}
+        <section id='content'>
+            {{ article.content }}
+        </section>
+
+        {# article footer details #}
+        <footer>
+            <p>Article footer</p>
+        </footer>
+    </article>
+{% endblock %}
