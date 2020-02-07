@@ -17,6 +17,11 @@ body {
     background: #fffc01; /* Gecko Browsers */
 }
 
+/* overwrite browser section > h1 small */
+section h1 {
+  font-size: 2em;
+}
+
 /* global modifiers */
 .hl {
   color: #003CFF;
@@ -58,7 +63,7 @@ body {
 /*********/
 ul, ol {
     margin: 0;
-    padding-left: 1.2em;
+    padding-left: 1.4em;
     overflow: hidden;
 }
 
