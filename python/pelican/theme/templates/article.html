@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block styles %}
+    {{ super() }}
     <link rel="stylesheet" type="text/css" href="/static/css/page.css">
 
     <!-- KaTeX settings -->
@@ -23,6 +24,7 @@
 
 {# additional meta tags #}
 {% block meta %}
+    {{ super() }}
     {% if article.description %}
         <meta name="description" content="{{ article.description }}" />
     {% endif %}
