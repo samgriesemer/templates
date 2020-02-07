@@ -9,11 +9,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* overwrite browser h1 small */
-h1 {
-    font-size: 2em;
-}
-
 /* selection highlight color */
 ::selection {
     background: #fffc01; /* WebKit/Blink Browsers */
@@ -62,15 +57,13 @@ h1 {
 /* LISTS */
 /*********/
 ul, ol {
-    /*margin: 0;
-    padding: 0;
-    list-style-type: square;
-    list-style-position: inside;*/
+    margin: 0;
+    padding-left: 1.2em;
     overflow: hidden;
 }
 
 ul ul {
-    padding-left: 2em;
+    padding-left: 1.2em;
 }
 
 /**********/
@@ -89,8 +82,6 @@ table tr {
 }
 
 table tr:hover {
-    /*border: dotted black;*/
-    /*border-width: 1px 0;*/
     outline: 1px dotted black;
 }
 
@@ -245,9 +236,10 @@ select {
 /*********/
 /* INPUT */
 /*********/
-input {
+input, textarea {
     border-radius: 2px;
     padding: 0.2em 0.4em;
+    border: 1px solid black;
 }
 
 /********/

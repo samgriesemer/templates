@@ -49,6 +49,8 @@ nav {
 /* nav link spacing */
 nav > a {
     margin-left: 1.5em;
+    /*letter-spacing: 3px;
+    font-size: 12px !important;*/
 }
 
 /**********/
@@ -61,7 +63,12 @@ body > footer {
 /************/
 /* HEADINGS */
 /************/
-#content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6 {
     /*margin: 0.3em 0;*/
     margin: 0;
 }
@@ -133,4 +140,16 @@ hr {
 #content img {
     display: block;
     margin: 1.5em auto;
+}
+
+/********/
+/* LOGO */
+/********/
+#logo {
+    width: 23px;
+    margin-top: 5px;
+}
+
+#logo:hover {
+    background-size: 0% !important;
 }
