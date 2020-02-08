@@ -12,6 +12,7 @@ syntax enable
 "colorscheme gruvbox
 setlocal spell
 set spelllang=en_us
+hi Normal guibg=NONE ctermbg=NONE
 
 """ PLUG PACKAGE MANAGER """
 " begin plugin list
