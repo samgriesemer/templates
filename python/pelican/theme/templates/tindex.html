@@ -1,0 +1,78 @@
+{% extends "page.html" %}
+
+{# set new nav items #}
+{% set MENUITEMS = (
+    ('ABOUT', '/about'),
+    ('FEED', '/feed'),
+    ('BLOG', '/blog'),
+    ('WIKI', '/wiki')
+) %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/css/article.css">
+{% endblock %}
+
+{% block main %}
+<p>This is the site of Sam Griesemer. I'm an undergraduate at <a href='https://wustl.edu'><i>Washington University</i></a> pursuing a B.S in computer science with a second major in mathematics. You can reach me at <b>samgriesemer at gmail dot com</b>. You can also find some of my code on <a href='https://github.com/samgriesemer'>Github</a> or contact me on <a href='https://twitter.com/samgriesemer'>Twitter</a>.</p>
+  
+<div class='row'>
+    <div class='col'>
+        <h1>Blog</h1>
+    </div>
+    <div class='col'>
+        <h1>Wiki</h1>
+    <ol id="post-list">
+        {% for article in articles_page.object_list %}
+           {% if article.system %}
+               {% if article.system == 'wiki' %}
+                    <li><article>
+                        <header>
+                            <h2><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h2>
+                        </header>
+                        <p> {{ article.summary }} </p>
+                        <footer>
+                            <time class="published" datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }} </time>
+                        </footer>
+                    </article></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ol>
+    </div>
+</div>
+<div class='row'>
+    <div class='col'>
+        <h1>Projects</h1>
+    </div>
+    <div class='col'>
+        <h1>Research</h1>
+    </div>
+</div>
+
+<!-- <h3>Education</h3>
+Washington University
+- Double major in Computer Science and Mathematics (Probability/Statistics)
+- GPA: 3.95/4.00
+- Selected coursework: Machine Learning, Computer Vision, Bayesian Machine Learning, Probability, Analysis of Algorithms, Analysis of Network Data
+<h3>Experience</h3>
+  - Powershades
+  - AMCE
+  - US Bancorp
+<h3>Research</h3>
+  - Papers
+  - Undergrad researcher
+    - HCI Lab
+    - Reinforcement learning
+    - Indepedent: deep generative models
+<h3>Teaching</h3>
+  - Assistant for 247,330,417,416,517
+<h3>Writing</h3>
+  - Intro to basic prob
+  - What is PixelRNN?
+<h3>Awards</h3>
+  - ISEF Finalist
+  - Best CS Paper Intel
+  - Hackathon winner
+  - Deans List (all semesters) -->
+{% endblock -%}

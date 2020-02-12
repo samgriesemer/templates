@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "page.html" %}
 
 {# delayed from base to use `article` object #}
 {% block title %}
@@ -7,24 +7,13 @@
 
 {% block styles %}
     {{ super() }}
-    <link rel="stylesheet" type="text/css" href="/static/css/page.css">
-
-    <!-- KaTeX settings -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.css" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.js" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
-
-    <style>.katex { font-size: 1em } .katex-display > .katex { white-space: normal !important; }</style>
-{% endblock %}
-
-{# main site header #}
-{% block header %}
-    {% include 'header.html' %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/article.css">
 {% endblock %}
 
 {# additional meta tags #}
 {% block meta %}
-    {{ super() }}
+		{{ super() }}
     {% if article.description %}
         <meta name="description" content="{{ article.description }}" />
     {% endif %}
@@ -44,22 +33,24 @@
 
             <section id='metadata'>
                 <time class="published" datetime="{{ article.date.isoformat() }}">
-                  Created: {{ article.locale_date }}
+                    {{ article.locale_date }}
                 </time>
 
                 {% if article.modified %}
                 <time class="modified" datetime="{{ article.modified.isoformat() }}">
-                  Modified: {{ article.locale_modified }}
+                    {{ article.locale_modified }}
                 </time>
                 {% endif %}
 
-                {#{% if article.authors %}
-                <address class="author">
+                {# dont need authors for now 
+                {% if article.authors %}
+                <address class="vcard author">
                   By {% for author in article.authors %}
                       <a class="url fn" href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
                     {% endfor %}
                 </address>
-                {% endif %}#}
+                {% endif %}
+                #}
 
                 {% if article.category %}
                 <div class="category">

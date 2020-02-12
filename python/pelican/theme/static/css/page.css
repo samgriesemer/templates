@@ -3,12 +3,11 @@
 /***********/
 /* add body margin, grid layout */
 body {
-    margin: auto;
+    margin: 0 10%;
     display: grid;
     min-height: 100vh;
     grid-template-rows: 4em 1fr 4em;
-    max-width: 56rem;
-    padding: 0 1em;
+    font-family: 'Akkurat';
 }
 
 .row, .col {
@@ -29,7 +28,8 @@ body {
 /**********/
 body > header {
     position: relative;
-    border-bottom: 1px dotted black;
+    border-bottom: 1px solid black;
+    z-index: 1;
 }
 
 /* centering header elements */
@@ -43,14 +43,16 @@ body > header > *, body > footer > * {
 
 /* shift header right */
 nav {
-    right: 0;
+    width: 100%;
 }
 
 /* nav link spacing */
-nav > a {
+nav > a:any-link {
     margin-left: 1.5em;
-    /*letter-spacing: 3px;
-    font-size: 12px !important;*/
+    letter-spacing: 2px;
+    font-size: 12px !important;
+    text-decoration: none;
+    float: right;
 }
 
 /**********/
@@ -58,88 +60,6 @@ nav > a {
 /**********/
 body > footer {
     position: relative;
-}
-
-/************/
-/* HEADINGS */
-/************/
-#content h1,
-#content h2,
-#content h3,
-#content h4,
-#content h5,
-#content h6 {
-    /*margin: 0.3em 0;*/
-    margin: 0;
-}
-
-header h1 {
-    font-size: 2.5em;
-    margin: 0.3em 0;
-}
-
-hr {
-    position: relative;
-    display: block;
-    margin: 0;
-    margin-bottom: 0.3em;
-    padding: 0;
-    height: 1px;
-    border: 0;
-    border-top: 1px dotted rgba(0,0,0,1.0);
-}
-
-/*******/
-/* TOC */
-/*******/
-.toc {
-    border: 4px double;
-    display: inline-block;
-    padding: 1em;
-    background: #0000000a;
-    margin: 0em 2em 2em 0;
-    float: left;
-    max-width: 25%;
-}
-
-.toc ul {
-    list-style-type: decimal;
-    margin: 0;
-}
-
-.toc > ul {
-    list-style-position: inside;
-    padding: 0;
-}
-
-/************/
-/* ABSTRACT */
-/************/
-#abstract {
-    border: 4px double;
-    background-color: #0000000a;
-    padding: 1em;
-    display: flex;
-    margin-bottom: 1.5em;
-}
-
-#abstract > p {
-    margin: 0;
-}
-
-/************/
-/* METADATA */
-/************/
-#metadata {
-    margin-bottom: 1.5em;
-}
-
-/**********/
-/* IMAGES */
-/**********/
-#content img {
-    display: block;
-    margin: 1.5em auto;
 }
 
 /********/

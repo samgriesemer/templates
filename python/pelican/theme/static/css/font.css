@@ -57,20 +57,6 @@
   font-style: normal;
 }
 
-/*@font-face { 
-  font-family: 'akkurat';
-  src: url('/assets/fonts/akkurat.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face { 
-  font-family: 'Noe';
-  src: url('/assets/fonts/noe-display-bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}*/
-
 @font-face { 
   font-family: 'SSP';
   src: url('/static/font/ssp/ssp-reg.woff2') format('truetype');
@@ -112,3 +98,4 @@
   font-weight: 500;
   font-style: italic;
 }
+

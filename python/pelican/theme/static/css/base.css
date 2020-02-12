@@ -123,32 +123,21 @@ table td {
     grid-auto-columns: 1fr;
 }
 
-.dtable .row:hover {
-    opacity: 0.7;
+/* may change if dtables arent always links */
+.dtable a:any-link {
+    text-decoration: none;
 }
 
 /*********/
 /* LINKS */
 /*********/
-a {
-    /*width: calc(100%);
-    background: linear-gradient(transparent 65%, #fffc01 4px) left;
-    background-repeat: no-repeat;
-    background-size: 0% 100%;
-    transition: background-size 0.4s;*/
-}
-
-a:hover {
-    /*background-size: 100% 100% !important;*/
-}
-
 a:any-link {
     color: #000;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:any-link:hover {
-    text-decoration: underline;
+    color: #333;
 }
 
 /***********/
@@ -198,6 +187,20 @@ input[type=range]::-moz-range-thumb {
     margin-top: -4px;
 }
 
+/*******************/
+/* HORIZONTAL RULE */
+/*******************/
+hr {
+    position: relative;
+    display: block;
+    margin: 0;
+    margin-bottom: 0.3em;
+    padding: 0;
+    height: 1px;
+    border: 0;
+    border-top: 1px dotted rgba(0,0,0,1.0);
+}
+
 /***********/
 /* BUTTONS */
 /***********/
@@ -241,7 +244,7 @@ select {
 /*********/
 /* INPUT */
 /*********/
-input, textarea {
+input[type=text], textarea {
     border-radius: 2px;
     padding: 0.2em 0.4em;
     border: 1px solid black;
