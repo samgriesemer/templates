@@ -19,9 +19,7 @@ hi Normal guibg=NONE ctermbg=NONE
 """ PLUG PACKAGE MANAGER """
 " begin plugin list
 call plug#begin('~/.vim/plugged')
-
-"" UltiSnips engine and snippets ""
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+"" UltiSnips engine and snippets "" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 "" VimTeX ""
 Plug 'lervag/vimtex'
@@ -32,10 +30,7 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 "" Extra TeX snips ""
 Plug 'gillescastel/latex-snippets'
 
-"" NERDTree ""
-Plug 'scrooloose/nerdtree'
-
-"" Airline ""
+"" NERDTree "" Plug 'scrooloose/nerdtree' "" Airline ""
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -50,9 +45,9 @@ Plug 'godlygeek/tabular'
 "Plug 'plasticboy/vim-markdown'
 
 "" VimWiki ""
-Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 
-"" TaskWiki ""
+"" Taskwiki ""
 Plug 'tbabej/taskwiki'
 
 " end plugin list, initialize system
@@ -83,7 +78,9 @@ highlight Comment cterm=italic
 
 "" VimWiki config ""
 let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+                      \ 'syntax': 'markdown', 'ext': '.md',
+                      \ 'links_space_char': '-'}]
+let g:vimwiki_global_ext = 0
 
-"" TaskWiki config ""
+"" Taskwiki config ""
 let g:taskwiki_markup_syntax = 'markdown'
