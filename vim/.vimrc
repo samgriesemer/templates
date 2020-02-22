@@ -52,6 +52,9 @@ Plug 'godlygeek/tabular'
 "" VimWiki ""
 Plug 'vimwiki/vimwiki'
 
+"" TaskWiki ""
+Plug 'tbabej/taskwiki'
+
 " end plugin list, initialize system
 call plug#end()
 
@@ -81,3 +84,6 @@ highlight Comment cterm=italic
 "" VimWiki config ""
 let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
+
+"" TaskWiki config ""
+let g:taskwiki_markup_syntax = 'markdown'
