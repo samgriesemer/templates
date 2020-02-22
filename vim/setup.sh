@@ -8,6 +8,10 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 # install default plugins
 vim +PlugInstall +qall
 
+# Taskwiki related installs
+#sudo apt-get install taskwarrior
+#sudo pip3 install git+git://github.com/robgolding63/tasklib@develop
+
 # install color themes into vim colors
 mkdir -p ~/.vim/colors/
 cp ~/.vim/plugged/vim-colors-solarized/colors/solarized.vim ~/.vim/colors/
