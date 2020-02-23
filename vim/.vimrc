@@ -19,7 +19,8 @@ hi Normal guibg=NONE ctermbg=NONE
 """ PLUG PACKAGE MANAGER """
 " begin plugin list
 call plug#begin('~/.vim/plugged')
-"" UltiSnips engine and snippets "" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+"" UltiSnips engine and snippets ""
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 "" VimTeX ""
 Plug 'lervag/vimtex'
