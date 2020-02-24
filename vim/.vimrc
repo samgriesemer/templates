@@ -82,6 +82,11 @@ let g:vim_markdown_folding_disabled = 1
 
 
 "" VimWiki config ""
+""" prereqs """
+set nocompatible
+filetype plugin on
+syntax on
+
 let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md',
                       \ 'links_space_char': '-'}]
