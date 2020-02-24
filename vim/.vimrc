@@ -7,7 +7,7 @@ set shiftwidth=2
 set expandtab
 set background=dark
 set conceallevel=1
-set colorcolumn=80
+"set colorcolumn=80
 
 syntax enable
 colorscheme solarized
@@ -19,7 +19,8 @@ hi Normal guibg=NONE ctermbg=NONE
 """ PLUG PACKAGE MANAGER """
 " begin plugin list
 call plug#begin('~/.vim/plugged')
-"" UltiSnips engine and snippets "" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+"" UltiSnips engine and snippets ""
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 "" VimTeX ""
 Plug 'lervag/vimtex'
@@ -42,7 +43,7 @@ Plug 'morhetz/gruvbox'
 
 "" Markdown ""
 Plug 'godlygeek/tabular'
-"Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown'
 
 "" VimWiki ""
 Plug 'vimwiki/vimwiki', {'branch': 'dev'}
@@ -75,6 +76,10 @@ let NERDTreeMinimalUI=1
 let g:vim_markdown_math = 1
 let g:vim_markdown_folding_disabled = 1
 highlight Comment cterm=italic
+
+"" Vim-markdown plugin config ""
+let g:vim_markdown_folding_disabled = 1
+
 
 "" VimWiki config ""
 let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki/',
