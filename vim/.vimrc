@@ -19,6 +19,7 @@ hi Normal guibg=NONE ctermbg=NONE
 """ PLUG PACKAGE MANAGER """
 " begin plugin list
 call plug#begin('~/.vim/plugged')
+
 "" UltiSnips engine and snippets ""
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
@@ -80,13 +81,10 @@ highlight Comment cterm=italic
 "" Vim-markdown plugin config ""
 let g:vim_markdown_folding_disabled = 1
 
-
 "" VimWiki config ""
-""" prereqs """
 set nocompatible
 filetype plugin on
 syntax on
-
 let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md',
                       \ 'links_space_char': '-'}]
