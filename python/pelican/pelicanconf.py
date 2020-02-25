@@ -55,13 +55,15 @@ MARKDOWN = {
         'markdown.extensions.extra': {},
         'markdown.extensions.meta': {},
         'markdown.extensions.toc': {},
+        'pymdownx.escapeall': {},
         'mdx_outline': {'configs': {'wrapper_cls': ''}},
     },
     'output_format': 'html5',
 }
 
 # Pelican plugins
-PLUGINS = ['pelican_katex']
+PLUGIN_PATHS = ['plugins']
+PLUGINS = ['pelican_katex', 'extract_toc']
 
 # templates to be rendered directly as static pages (have direct access to theme templates)
 TEMPLATE_PAGES = {
