@@ -6,3 +6,4 @@ fi
 ## KEYS ##
 bindkey -v
 bindkey "^[OA" up-line-or-search
+bindkey "^[OB" down-line-or-search
