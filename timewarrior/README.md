@@ -1,5 +1,5 @@
 # Set DB directory
- Edit your `.basrc` or `.zshrc` and set the `TIMEWARRIORDB` environment variable:
+ Edit your `.bashrc` or `.zshrc` and set the `TIMEWARRIORDB` environment variable:
 
  ```
  TASKWARRIORDB=/path/to/other/location`
