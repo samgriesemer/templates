@@ -77,7 +77,7 @@ highlight Comment cterm=italic
 
 "" Vim-markdown plugin config ""
 let g:vim_markdown_math = 1
-let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal = 1
 let g:vim_markdown_folding_disabled = 1
 
 "" VimWiki config ""
@@ -91,6 +91,7 @@ let g:vimwiki_global_ext = 0
 
 "" Taskwiki config ""
 let g:taskwiki_markup_syntax = 'markdown'
+let g:taskwiki_sort_order = 'urgency-'
 
 "" Transparent bg to match terminal, comes at end to ensure hi isn't overwritten
 hi Normal guibg=NONE ctermbg=NONE
