@@ -2,18 +2,26 @@
 set shell=/bin/bash
 set mouse=nicr
 set number
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 set background=dark
 set conceallevel=1
 "set colorcolumn=80
 
-syntax enable
 colorscheme solarized
 "colorscheme gruvbox
+"
+syntax enable
 setlocal spell
 set spelllang=en_us
+
+" fix spelling error highlights
+augroup spell_colors
+  autocmd!
+  autocmd ColorScheme solarized hi SpellBad cterm=underline
+augroup END
+
 
 """ PLUG PACKAGE MANAGER """
 " begin plugin list
