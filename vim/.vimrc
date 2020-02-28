@@ -22,7 +22,6 @@ augroup spell_colors
   autocmd ColorScheme solarized hi SpellBad cterm=underline
 augroup END
 
-
 """ PLUG PACKAGE MANAGER """
 " begin plugin list
 call plug#begin('~/.vim/plugged')
@@ -58,6 +57,10 @@ Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 
 "" Taskwiki ""
 Plug 'tbabej/taskwiki'
+
+"" fzf ""
+Plug '~/.fzf'
+Plug 'junegunn/fzf.vim'
 
 " end plugin list, initialize system
 call plug#end()
@@ -103,3 +106,29 @@ let g:taskwiki_sort_order = 'urgency-'
 
 "" Transparent bg to match terminal, comes at end to ensure hi isn't overwritten
 hi Normal guibg=NONE ctermbg=NONE
+
+"" Custom commands ""
+
+" search wiki files + fzf preview
+command! -bang -nargs=? -complete=dir Wf
+    \ call fzf#vim#files('$HOME/Nextcloud/vimwiki/', fzf#vim#with_preview(), <bang>0)
+
+" search all lines in wiki files, first input is exact rg then fzf preview
+command! -bang -nargs=* Wl
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>).' $HOME/Nextcloud/vimwiki', 1,
+    \   fzf#vim#with_preview({'options':'--delimiter : --with-nth 4.. --nth 1..'}), <bang>0)
+
+" find backlinks for current file 
+command! -bang -nargs=* Wb
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case ''\[[^\]]*\]\([\./\\]*'.expand('%:t:r').'(#[^\)]*)*\)'' $HOME/Nextcloud/vimwiki', 1,
+    \ fzf#vim#with_preview(), <bang>0)
+
+" Get fuzzy unlinked references related to current filename 
+" Uses :Wl with empty rg query followed by live fzf session
+" on wiki page lines
+command! -bang -nargs=* Wu
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case ''.*'' $HOME/Nextcloud/vimwiki', 1,
+    \   fzf#vim#with_preview({'options':'-q '.shellescape(expand('%:t:r')).' --delimiter : --with-nth 4.. --nth 1..'}), <bang>0)
