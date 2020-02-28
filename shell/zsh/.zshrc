@@ -7,3 +7,12 @@ fi
 bindkey -v
 bindkey "^[OA" up-line-or-search
 bindkey "^[OB" down-line-or-search
+
+# TIMEWARRIOR
+export TIMEWARRIORDB=$HOME/Nextcloud/.timewarrior
+
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# BAT
+export BAT_THEME='Default'
