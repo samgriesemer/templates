@@ -102,32 +102,40 @@ let g:vimwiki_global_ext = 0
 
 "" Taskwiki config ""
 let g:taskwiki_markup_syntax = 'markdown'
-let g:taskwiki_sort_order = 'urgency-'
+let g:taskwiki_sort_order = 'status-,urgency-'
 
 "" Transparent bg to match terminal, comes at end to ensure hi isn't overwritten
 hi Normal guibg=NONE ctermbg=NONE
 
 "" Custom commands ""
+nmap <Leader>wf :Files $HOME/Nextcloud/vimwiki/<CR>
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=default']}), <bang>0)
 
 " search wiki filenames + fzf preview
 command! -bang -nargs=? -complete=dir Wf
-    \ call fzf#vim#files('$HOME/Nextcloud/vimwiki/', fzf#vim#with_preview(), <bang>0)
+    \ call fzf#vim#files('$HOME/Nextcloud/vimwiki/', fzf#vim#with_preview('right:40%:wrap'), <bang>0)
 
 " search all lines in wiki files, first input is exact ripgrep  match then fzf preview
 command! -bang -nargs=* Wl
     \ call fzf#vim#grep(
     \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>).' $HOME/Nextcloud/vimwiki', 1,
-    \   fzf#vim#with_preview({'options':'--delimiter : --with-nth 4.. --nth 1..'}), <bang>0)
+    \   fzf#vim#with_preview({'options':'--delimiter : --with-nth 4.. --nth 1.. -q '.shellescape(<q-args>)}), <bang>0)
 
 " find backlinks for current file using ripgrep on exact filename link regex
+" after exact search, prefill fzf session with filename to highlight context
+" (note that an additional space is added after prefill to allow immediate
+" typing; without space matching becomes odd)
 command! -bang -nargs=* Wb
     \ call fzf#vim#grep(
     \   'rg --column --line-number --no-heading --color=always --smart-case ''\[[^\]]*\]\([\./\\]*'.expand('%:t:r').'(#[^\)]*)*\)'' $HOME/Nextcloud/vimwiki', 1,
-    \ fzf#vim#with_preview(), <bang>0)
+    \ fzf#vim#with_preview({'options':'-q '''.shellescape(expand('%:t:r')).' '''}, 'right:50%:wrap'), <bang>0)
 
 " Get fuzzy unlinked references related to current filename using ripgrep to
-" get all lines. Following fzf session is prefilled with current filename.
+" get all lines. Following fzf session is prefilled with current filename
+" (plus a space to allow typing immediately)
 command! -bang -nargs=* Wu
     \ call fzf#vim#grep(
     \   'rg --column --line-number --no-heading --color=always --smart-case ''.*'' $HOME/Nextcloud/vimwiki', 1,
-    \   fzf#vim#with_preview({'options':'-q '.shellescape(expand('%:t:r')).' --delimiter : --with-nth 4.. --nth 1..'}), <bang>0)
+    \   fzf#vim#with_preview({'options':'-q '''.shellescape(expand('%:t:r')).' '' --delimiter : --with-nth 4.. --nth 1..'}), <bang>0)
