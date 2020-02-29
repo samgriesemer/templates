@@ -11,7 +11,7 @@ set conceallevel=1
 
 colorscheme solarized
 "colorscheme gruvbox
-"
+
 syntax enable
 setlocal spell
 set spelllang=en_us
@@ -59,7 +59,7 @@ Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 Plug 'tbabej/taskwiki'
 
 "" fzf ""
-Plug '~/.fzf'
+Plug '~/.fzf' "make sure fzf installed (along with ripgrep)
 Plug 'junegunn/fzf.vim'
 
 " end plugin list, initialize system
@@ -109,25 +109,24 @@ hi Normal guibg=NONE ctermbg=NONE
 
 "" Custom commands ""
 
-" search wiki files + fzf preview
+" search wiki filenames + fzf preview
 command! -bang -nargs=? -complete=dir Wf
     \ call fzf#vim#files('$HOME/Nextcloud/vimwiki/', fzf#vim#with_preview(), <bang>0)
 
-" search all lines in wiki files, first input is exact rg then fzf preview
+" search all lines in wiki files, first input is exact ripgrep  match then fzf preview
 command! -bang -nargs=* Wl
     \ call fzf#vim#grep(
     \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>).' $HOME/Nextcloud/vimwiki', 1,
     \   fzf#vim#with_preview({'options':'--delimiter : --with-nth 4.. --nth 1..'}), <bang>0)
 
-" find backlinks for current file 
+" find backlinks for current file using ripgrep on exact filename link regex
 command! -bang -nargs=* Wb
     \ call fzf#vim#grep(
     \   'rg --column --line-number --no-heading --color=always --smart-case ''\[[^\]]*\]\([\./\\]*'.expand('%:t:r').'(#[^\)]*)*\)'' $HOME/Nextcloud/vimwiki', 1,
     \ fzf#vim#with_preview(), <bang>0)
 
-" Get fuzzy unlinked references related to current filename 
-" Uses :Wl with empty rg query followed by live fzf session
-" on wiki page lines
+" Get fuzzy unlinked references related to current filename using ripgrep to
+" get all lines. Following fzf session is prefilled with current filename.
 command! -bang -nargs=* Wu
     \ call fzf#vim#grep(
     \   'rg --column --line-number --no-heading --color=always --smart-case ''.*'' $HOME/Nextcloud/vimwiki', 1,

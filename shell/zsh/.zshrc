@@ -20,7 +20,7 @@ export FZF_DEFAULT_OPTS="
 "
 
 ## BAT ##
-#export BAT_THEME='ansi-dark'
+export BAT_THEME='ansi-dark'
 
 ## FIX GLOB ##
 unsetopt nomatch
