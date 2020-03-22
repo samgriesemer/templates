@@ -7,7 +7,16 @@ set shiftwidth=4
 set expandtab
 set background=dark
 set conceallevel=1
-"set colorcolumn=80
+
+" text wrapping config
+"set textwidth=90
+"set colorcolumn=90
+set wrap
+set linebreak
+set breakindent
+filetype plugin indent on
+autocmd BufRead,BufNewFile *.md,*.txt setlocal breakindentopt=shift:2
+"set columns=90
 
 colorscheme solarized
 "colorscheme gruvbox
@@ -15,6 +24,7 @@ colorscheme solarized
 syntax enable
 setlocal spell
 set spelllang=en_us
+autocmd BufRead,BufNewFile *.md setlocal spell
 
 " fix spelling error highlights
 augroup spell_colors
@@ -38,7 +48,10 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 "" Extra TeX snips ""
 Plug 'gillescastel/latex-snippets'
 
-"" NERDTree "" Plug 'scrooloose/nerdtree' "" Airline ""
+"" NERDTree ""
+Plug 'scrooloose/nerdtree'
+
+"" Airline ""
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -61,6 +74,7 @@ Plug 'tbabej/taskwiki'
 "" fzf ""
 Plug '~/.fzf' "make sure fzf installed (along with ripgrep)
 Plug 'junegunn/fzf.vim'
+
 
 " end plugin list, initialize system
 call plug#end()
@@ -90,12 +104,13 @@ highlight Comment cterm=italic
 let g:vim_markdown_math = 1
 let g:vim_markdown_conceal = 1
 let g:vim_markdown_folding_disabled = 1
+"let g:vim_markdown_auto_insert_bullets = 0
 
 "" VimWiki config ""
 set nocompatible
 filetype plugin on
 syntax on
-let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki/',
+let g:vimwiki_list = [{'path': '~/Nextcloud/sitefiles/',
                       \ 'syntax': 'markdown', 'ext': '.md',
                       \ 'links_space_char': '-'}]
 let g:vimwiki_global_ext = 0
@@ -104,38 +119,101 @@ let g:vimwiki_global_ext = 0
 let g:taskwiki_markup_syntax = 'markdown'
 let g:taskwiki_sort_order = 'status-,urgency-'
 
+
 "" Transparent bg to match terminal, comes at end to ensure hi isn't overwritten
 hi Normal guibg=NONE ctermbg=NONE
 
 "" Custom commands ""
-nmap <Leader>wf :Files $HOME/Nextcloud/vimwiki/<CR>
+" enforce no arrows
+noremap <Up>    <Nop>
+noremap <Down>  <Nop>
+noremap <Left>  <Nop>
+noremap <Right> <Nop>
+
+" redefine <Leader> to <space>
+let mapleader = "\<Space>"
+nmap <Leader>wf :Wf<CR>
+nmap <Leader>wb :Wb<CR>
 
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=default']}), <bang>0)
 
-" search wiki filenames + fzf preview
-command! -bang -nargs=? -complete=dir Wf
-    \ call fzf#vim#files('$HOME/Nextcloud/vimwiki/', fzf#vim#with_preview('right:40%:wrap'), <bang>0)
+" NOTE: fzf#vim#preview() arguments
+" First argument: {'options': <options_dict>, 'right/left/up/down': '<perc>%'}
+" Second argument: 'right/left/up/down': <perc>% [for preview window location]
 
-" search all lines in wiki files, first input is exact ripgrep  match then fzf preview
+" Search wiki filenames + fzf preview
+command! -bang -nargs=? -complete=dir Wf
+    \ call fzf#vim#files('$HOME/Nextcloud/sitefiles/', fzf#vim#with_preview({'right':'50%'}, 'down:50%:wrap'), <bang>0)
+
+" Search all lines in wiki files, first input is exact ripgrep match, then fzf preview
 command! -bang -nargs=* Wl
     \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>).' $HOME/Nextcloud/vimwiki', 1,
-    \   fzf#vim#with_preview({'options':'--delimiter : --with-nth 4.. --nth 1.. -q '.shellescape(<q-args>)}), <bang>0)
+    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>).' $HOME/Nextcloud/sitefiles', 1,
+    \   fzf#vim#with_preview({'options': '--delimiter : --with-nth 4.. --nth 1.. -q '.shellescape(<q-args>),
+    \                         'right': '50%'}, 'down:50%:wrap'), <bang>0)
 
-" find backlinks for current file using ripgrep on exact filename link regex
+" Find backlinks for current file using ripgrep on exact filename link regex
 " after exact search, prefill fzf session with filename to highlight context
 " (note that an additional space is added after prefill to allow immediate
 " typing; without space matching becomes odd)
 command! -bang -nargs=* Wb
     \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always --smart-case ''\[[^\]]*\]\([\./\\]*'.expand('%:t:r').'(#[^\)]*)*\)'' $HOME/Nextcloud/vimwiki', 1,
-    \ fzf#vim#with_preview({'options':'-q '''.shellescape(expand('%:t:r')).' '''}, 'right:50%:wrap'), <bang>0)
+    \   'rg --column --line-number --no-heading --color=always --smart-case ''\[[^\]]*\]\((.*/)*'.expand('%:t:r').'(#[^\)]*)*\)'' $HOME/Nextcloud/sitefiles', 1,
+    \   fzf#vim#with_preview({'options': '-q '''.shellescape(expand('%:t:r')).' ''',
+    \                         'right': '50%'}, 'down:50%:wrap'), <bang>0)
 
 " Get fuzzy unlinked references related to current filename using ripgrep to
 " get all lines. Following fzf session is prefilled with current filename
 " (plus a space to allow typing immediately)
 command! -bang -nargs=* Wu
     \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always --smart-case ''.*'' $HOME/Nextcloud/vimwiki', 1,
-    \   fzf#vim#with_preview({'options':'-q '''.shellescape(expand('%:t:r')).' '' --delimiter : --with-nth 4.. --nth 1..'}), <bang>0)
+    \   'rg --column --line-number --no-heading --color=always --smart-case ''.*'' $HOME/Nextcloud/sitefiles', 1,
+    \   fzf#vim#with_preview({'options': '-q '''.shellescape(expand('%:t:r')).' '' --delimiter : --with-nth 4.. --nth 1..',
+    \                         'right': '50%'}, 'down'), <bang>0)
+
+" EXPERIMENTAL COMMANDS (commands under development)
+
+" Global line completion (not just open buffers. ripgrep required.)
+inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
+  \ 'prefix': '^.*$',
+  \ 'source': 'cd $HOME/Nextcloud/sitefiles && rg -n --color always ^',
+  \ 'options': '--ansi --delimiter : --nth 3..',
+  \ 'right': 40,
+  \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
+
+" Autocomplete links (fills dashes with spaces, underscores with dots)
+function! s:wrap_link(lines)
+    " back to insert mode
+    call feedkeys('i')
+
+    " remove markdown extension
+    let file = substitute(join(a:lines),'\.md','','')
+
+    " remove prior relative pathing (/,\,.) should NOT be in filename
+    "let display = substitute(file,'[\./\\]','','g')
+    let display = substitute(file,'.*/','','g')
+
+    " replace underscores with dots
+    let display = substitute(display,'_','.','g')
+
+    " replace dashes with spaces
+    let display = substitute(display,'-',' ','g')
+
+    " return final concatenation
+    return '['.display.']('.file.')  '
+endfunction
+
+inoremap <expr> [[ fzf#vim#complete(fzf#wrap({
+    "\ 'source': ''find $HOME/Nextcloud/vimwiki -path '*/\.*' -prune -o -type f -print -o -type l -print -exec realpath --relative-to ''.expand('%:p:h')." {} \; \| sed 's:^..::'",
+    \ 'source': 'find $HOME/Nextcloud/sitefiles -exec realpath --relative-to '.expand('%:p:h').' \{\} \;',
+    \ 'reducer': function('<sid>wrap_link'),
+    \ 'options': '--multi --reverse --margin 15%,0',
+    \ 'right':    40}))
+
+" metadata template for all new files
+au BufNewFile $HOME/Nextcloud/sitefiles/*.md :silent 0r !$HOME/Nextcloud/vwbin/vwbash '%'
+
+" modified time update on file save
+" :autocmd BufWritePost /path/to/file/or/pattern !command <afile>
+
