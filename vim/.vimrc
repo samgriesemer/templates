@@ -132,8 +132,23 @@ noremap <Right> <Nop>
 
 " redefine <Leader> to <space>
 let mapleader = "\<Space>"
+nmap <Leader>df :Df<CR>
+nmap <Leader>dl :Dl<CR>
 nmap <Leader>wf :Wf<CR>
+nmap <Leader>wl :Wl<CR>
 nmap <Leader>wb :Wb<CR>
+nmap <Leader>wu :Wu<CR>
+
+" Search current directory filenames + fzf preview
+command! -bang -nargs=? -complete=dir Df
+    \ call fzf#vim#files('.', fzf#vim#with_preview({'right':'50%'}, 'down:50%:wrap'), <bang>0)
+
+" Search all lines in current directory files, first input is exact ripgrep match, then fzf preview
+command! -bang -nargs=* Dl
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>).' .', 1,
+    \   fzf#vim#with_preview({'options': '--delimiter : --with-nth 4.. --nth 1.. -q '.shellescape(<q-args>),
+    \                         'right': '50%'}, 'down:50%:wrap'), <bang>0)
 
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=default']}), <bang>0)
