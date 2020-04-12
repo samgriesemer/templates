@@ -88,7 +88,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 "" VimTex configuration ""
 let g:tex_flavor='latex'
-let g:vimtex_view_method='skim'
+let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 
 "" TeX-conceal configuration ""
@@ -104,7 +104,7 @@ highlight Comment cterm=italic
 let g:vim_markdown_math = 1
 let g:vim_markdown_conceal = 1
 let g:vim_markdown_folding_disabled = 1
-"let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_auto_insert_bullets = 0
 
 "" VimWiki config ""
 set nocompatible
@@ -197,20 +197,35 @@ inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
   \ 'right': 40,
   \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
 
+" Process file name appropriately (e.g. remove spaces, periods, etc)
+function! s:process_filename(name)
+    let filename = a:name
+
+    " replace spaces with dashes
+    let filename = substitute(filename,' ','-','g')
+
+    " replace periods with underscores
+    let filename = substitute(filename,'\.','_','g')
+
+    return filename
+endfunction
+
 " Autocomplete links (fills dashes with spaces, underscores with dots)
 function! s:wrap_link(lines)
     " back to insert mode
     call feedkeys('i')
 
-    " remove markdown extension
-    let file = substitute(join(a:lines),'\.md','','')
+    " parse file name, processing it using wrap_link
+    " (if new, otherwise name should remain unchanged)
+    let file = join(a:lines)
+    let path = matchstr(file,'.*/')
+    let filename = substitute(file,'.*/','','')
+    let filename = substitute(filename,'\.md','','')
+    let filename = s:process_filename(filename)
+    let file = path.filename
 
-    " remove prior relative pathing (/,\,.) should NOT be in filename
-    "let display = substitute(file,'[\./\\]','','g')
-    let display = substitute(file,'.*/','','g')
-
-    " replace underscores with dots
-    let display = substitute(display,'_','.','g')
+    " replace underscores with periods
+    let display = substitute(filename,'_','.','g')
 
     " replace dashes with spaces
     let display = substitute(display,'-',' ','g')
@@ -220,10 +235,9 @@ function! s:wrap_link(lines)
 endfunction
 
 inoremap <expr> [[ fzf#vim#complete(fzf#wrap({
-    "\ 'source': ''find $HOME/Nextcloud/vimwiki -path '*/\.*' -prune -o -type f -print -o -type l -print -exec realpath --relative-to ''.expand('%:p:h')." {} \; \| sed 's:^..::'",
     \ 'source': 'find $HOME/Nextcloud/sitefiles -exec realpath --relative-to '.expand('%:p:h').' \{\} \;',
     \ 'reducer': function('<sid>wrap_link'),
-    \ 'options': '--multi --reverse --margin 15%,0',
+    \ 'options': '--bind=ctrl-p:print-query --multi --reverse --margin 15%,0',
     \ 'right':    40}))
 
 " metadata template for all new files
