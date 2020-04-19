@@ -114,6 +114,7 @@ let g:vimwiki_list = [{'path': '~/Nextcloud/sitefiles/',
                       \ 'syntax': 'markdown', 'ext': '.md',
                       \ 'links_space_char': '-'}]
 let g:vimwiki_global_ext = 0
+"let g:vimwiki_folding='list'
 
 "" Taskwiki config ""
 let g:taskwiki_markup_syntax = 'markdown'
@@ -125,10 +126,10 @@ hi Normal guibg=NONE ctermbg=NONE
 
 "" Custom commands ""
 " enforce no arrows
-noremap <Up>    <Nop>
-noremap <Down>  <Nop>
-noremap <Left>  <Nop>
-noremap <Right> <Nop>
+noremap <Up>   <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right><Nop>
 
 " redefine <Leader> to <space>
 let mapleader = "\<Space>"
@@ -210,7 +211,10 @@ function! s:process_filename(name)
     return filename
 endfunction
 
-" Autocomplete links (fills dashes with spaces, underscores with dots)
+" Autocomplete links (fills dashes with spaces, underscores with dots) Can be
+" 1) no path, just filename. Returned string will remain local
+" 2) subsystem path relative to the system root e.g. 'wiki/name.md' or 'feed/name.md'
+"    In this case returned path will be relative to current file
 function! s:wrap_link(lines)
     " back to insert mode
     call feedkeys('i')
@@ -219,10 +223,23 @@ function! s:wrap_link(lines)
     " (if new, otherwise name should remain unchanged)
     let file = join(a:lines)
     let path = matchstr(file,'.*/')
+    let newpath = ""
+
+    if !empty(path)
+        let pathcmd = "realpath --relative-to ".expand('%:p:h')." $HOME/Nextcloud/sitefiles/".path
+        let newpath = system(pathcmd)."/"
+        let newpath = substitute(newpath,'\n','','g')
+
+        " handle absolute wiki file path for local directories
+        if newpath == "./"
+            let newpath = ""
+        endif
+    endif
+
     let filename = substitute(file,'.*/','','')
     let filename = substitute(filename,'\.md','','')
     let filename = s:process_filename(filename)
-    let file = path.filename
+    let file = newpath.filename
 
     " replace underscores with periods
     let display = substitute(filename,'_','.','g')
@@ -231,13 +248,13 @@ function! s:wrap_link(lines)
     let display = substitute(display,'-',' ','g')
 
     " return final concatenation
-    return '['.display.']('.file.')  '
+    return '['.display.']('.file.') '
 endfunction
 
 inoremap <expr> [[ fzf#vim#complete(fzf#wrap({
-    \ 'source': 'find $HOME/Nextcloud/sitefiles -exec realpath --relative-to '.expand('%:p:h').' \{\} \;',
+    \ 'source': 'find $HOME/Nextcloud/sitefiles -exec realpath --relative-to $HOME/Nextcloud/sitefiles \{\} \;',
     \ 'reducer': function('<sid>wrap_link'),
-    \ 'options': '--bind=ctrl-p:print-query --multi --reverse --margin 15%,0',
+    \ 'options': '--bind=ctrl-d:print-query --multi --reverse --margin 15%,0',
     \ 'right':    40}))
 
 " metadata template for all new files
