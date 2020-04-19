@@ -126,10 +126,10 @@ hi Normal guibg=NONE ctermbg=NONE
 
 "" Custom commands ""
 " enforce no arrows
-noremap <Up>   <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right><Nop>
+noremap <Up>    <Nop>
+noremap <Down>  <Nop>
+noremap <Left>  <Nop>
+noremap <Right> <Nop>
 
 " redefine <Leader> to <space>
 let mapleader = "\<Space>"
