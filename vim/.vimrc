@@ -7,6 +7,8 @@ set shiftwidth=4
 set expandtab
 set background=dark
 set conceallevel=1
+set timeoutlen=600
+set ttimeoutlen=50
 
 " text wrapping config
 "set textwidth=90
@@ -42,11 +44,11 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 "" VimTeX ""
 Plug 'lervag/vimtex'
 
-"" TeX-conceal ""
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-
 "" Extra TeX snips ""
 Plug 'gillescastel/latex-snippets'
+
+"" TeX-conceal ""
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': ['tex','md','vimwiki']}
 
 "" NERDTree ""
 Plug 'scrooloose/nerdtree'
@@ -88,7 +90,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 "" VimTex configuration ""
 let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
+let g:vimtex_view_method='skim'
 let g:vimtex_quickfix_mode=0
 
 "" TeX-conceal configuration ""
@@ -202,11 +204,10 @@ inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
 function! s:process_filename(name)
     let filename = a:name
 
-    " replace spaces with dashes
-    let filename = substitute(filename,' ','-','g')
+    " replace spaces with underscores
+    let filename = substitute(filename,' ','_','g')
 
-    " replace periods with underscores
-    let filename = substitute(filename,'\.','_','g')
+    " replace special chars (?!%$, etc)
 
     return filename
 endfunction
@@ -241,11 +242,8 @@ function! s:wrap_link(lines)
     let filename = s:process_filename(filename)
     let file = newpath.filename
 
-    " replace underscores with periods
+    " replace underscores with spaces
     let display = substitute(filename,'_','.','g')
-
-    " replace dashes with spaces
-    let display = substitute(display,'-',' ','g')
 
     " return final concatenation
     return '['.display.']('.file.') '
@@ -257,9 +255,30 @@ inoremap <expr> [[ fzf#vim#complete(fzf#wrap({
     \ 'options': '--bind=ctrl-d:print-query --multi --reverse --margin 15%,0',
     \ 'right':    40}))
 
-" metadata template for all new files
-au BufNewFile $HOME/Nextcloud/sitefiles/*.md :silent 0r !$HOME/Nextcloud/vwbin/vwbash '%'
+inoremap <expr> [f fzf#vim#complete(fzf#wrap({
+    \ 'source': 'find $HOME/Nextcloud/sitefiles -exec realpath --relative-to $HOME/Nextcloud/sitefiles \{\} \;',
+    \ 'reducer': function('<sid>wrap_link'),
+    \ 'options': '--bind=ctrl-d:print-query -q ''feed/'' --multi --reverse --margin 15%,0',
+    \ 'right':    40}))
+
+inoremap <expr> [w fzf#vim#complete(fzf#wrap({
+    \ 'source': 'find $HOME/Nextcloud/sitefiles -exec realpath --relative-to $HOME/Nextcloud/sitefiles \{\} \;',
+    \ 'reducer': function('<sid>wrap_link'),
+    \ 'options': '--bind=ctrl-d:print-query -q ''wiki/'' --multi --reverse --margin 15%,0',
+    \ 'right':    40}))
+
+inoremap <expr> [z fzf#vim#complete(fzf#wrap({
+    \ 'source': 'find $HOME/Nextcloud/sitefiles -exec realpath --relative-to $HOME/Nextcloud/sitefiles \{\} \;',
+    \ 'reducer': function('<sid>wrap_link'),
+    \ 'options': '--bind=ctrl-d:print-query -q ''zettels/'' --multi --reverse --margin 15%,0',
+    \ 'right':    40}))
+
+" metadata template for all new files (broken down by note type)
+au BufNewFile $HOME/Nextcloud/sitefiles/wiki/*.md :silent 0r !$HOME/Nextcloud/vwbin/wiki_template.sh '%'
+au BufNewFile $HOME/Nextcloud/sitefiles/feed/*.md :silent 0r !$HOME/Nextcloud/vwbin/feed_template.sh '%'
+au BufNewFile $HOME/Nextcloud/sitefiles/zettels/*.md :silent 0r !$HOME/Nextcloud/vwbin/zettel_template.sh '%'
+au BufNewFile $HOME/Nextcloud/sitefiles/diary/*.md :silent 0r !$HOME/Nextcloud/vwbin/diary_template.sh '%'
 
 " modified time update on file save
-" :autocmd BufWritePost /path/to/file/or/pattern !command <afile>
+#au BufWritePost $HOME/Nextcloud/sitefiles/*.md :silent 0r !$HOME/Nextcloud/vwbin/modtime_update.sh '%'
 
