@@ -114,7 +114,7 @@ filetype plugin on
 syntax on
 let g:vimwiki_list = [{'path': '~/Nextcloud/sitefiles/',
                       \ 'syntax': 'markdown', 'ext': '.md',
-                      \ 'links_space_char': '-'}]
+                      \ 'links_space_char': '_'}]
 let g:vimwiki_global_ext = 0
 "let g:vimwiki_folding='list'
 
@@ -243,7 +243,7 @@ function! s:wrap_link(lines)
     let file = newpath.filename
 
     " replace underscores with spaces
-    let display = substitute(filename,'_','.','g')
+    let display = substitute(filename,'_',' ','g')
 
     " return final concatenation
     return '['.display.']('.file.') '
@@ -280,5 +280,9 @@ au BufNewFile $HOME/Nextcloud/sitefiles/zettels/*.md :silent 0r !$HOME/Nextcloud
 au BufNewFile $HOME/Nextcloud/sitefiles/diary/*.md :silent 0r !$HOME/Nextcloud/vwbin/diary_template.sh '%'
 
 " modified time update on file save
-#au BufWritePost $HOME/Nextcloud/sitefiles/*.md :silent 0r !$HOME/Nextcloud/vwbin/modtime_update.sh '%'
+function! s:update_modtime()
+    :silent 0r !$HOME/Nextcloud/vwbin/modtime_update.sh '%'
+    :e
+endfunction
 
+au BufWritePost $HOME/Nextcloud/sitefiles/*.md :call s:update_modtime()
