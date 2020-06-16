@@ -48,7 +48,8 @@ function! RelPathFromFile(path)
 endfunction
 
 " Autocomplete links (fills dashes with spaces, underscores with dots) Can be
-" 1) no path, just filename. Returned string will remain local
+" 1) no path, just filename. Returned string will remain local (i dont get why this is
+" listed, it's never this way)
 " 2) subsystem path relative to the system root e.g. 'wiki/name.md' or 'feed/name.md'
 "    In this case returned path will be relative to current file
 "
@@ -76,13 +77,13 @@ function! WrapLink(path)
     let dname = FnameToString(fname)
 
     " return final concatenation
-    return '['.dname.']('.relpath.') '
+    return '['.dname.']('.relpath.')'
 endfunction 
 
 " Function to specificly handle FZF completed links in the mappings below
 function! s:handle_completed_link(lines)
     " return to insert mode
-    call feedkeys('i')
+    call feedkeys('A')
 
     " handle (presumably) single FZF selection
     let path = join(a:lines)
@@ -116,4 +117,5 @@ imap <expr> [z fzf#vim#complete(fzf#wrap({
     \ 'reducer': function('<sid>handle_completed_link'),
     \ 'options': '--bind=ctrl-d:print-query -q ''zettels/'' --multi --reverse --margin 15%,0',
     \ 'right':    40}))
+
 

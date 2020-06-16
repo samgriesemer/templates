@@ -46,8 +46,7 @@ function TemplateList(fname, tag, src, sum, toc, jrn)
 
     if a:jrn
         let template = template."\n\n
-            \# New Pages\n\n
-            \# TODO\n\n
+            \# TODO | due:".date."\n\n
             \# [Log](../wiki/Log)\n\n
             \# [Thoughts](../wiki/Thoughts)"
     endif
