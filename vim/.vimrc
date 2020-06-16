@@ -23,15 +23,8 @@ set textwidth=90
 set display+=lastline
 filetype plugin indent off
 
-" specific `formatoptions` and `comments`; allow
-" comments to be reformatted with `gq` (q, already
-" a default), and recognize numbered lists (n). For
-" comments, allows "#" in Markdown to be nested and
-" thus prevents oddities when reformatting
-set fo+=qn
-set comments+=n:#
-
 colorscheme solarized
+"au BufEnter *.md colorscheme mdsolarized
 "colorscheme gruvbox
 
 syntax enable
@@ -84,7 +77,7 @@ Plug 'dkarter/bullets.vim'
 
 "" Wiki ""
 "Plug 'lervag/wiki.vim'
-Plug 'samgriesemer/roam.vim'
+Plug 'samgriesemer/vim-roam'
 
 "" Vim-taskwarrior ""
 Plug 'blindFS/vim-taskwarrior'
@@ -181,6 +174,9 @@ nmap <Leader>wu :WikiFzfUnlinks<CR>
 
 " wiki in-page TOC search
 nmap <Leader>wt :WikiFzfToc<CR>
+
+" wiki create file
+nmap <Leader>we :WikiCreateFile<CR>
 
 " tabular formatted tables
 inoremap <silent> <Bar>   <Bar><Esc>:call TableAlign()<CR>a
