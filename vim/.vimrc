@@ -120,10 +120,13 @@ let g:vim_markdown_new_list_item_indent = 0
 
 "" Wiki ""
 let g:wiki_root = '~/Nextcloud/sitefiles'
-let g:wiki_link_target_type = 'md'
-let g:wiki_link_extension = 'md'
+"let g:wiki_root = '~/Documents/notes'
+"let g:wiki_link_target_type = 'md'
+"let g:wiki_link_extension = 'md'
 let g:wiki_filetypes = ['md']
 let g:wiki_write_on_follow = 1
+let g:wiki_map_create_page = 'StringToFname'
+"let g:wiki_map_link_create  = 'FnameToString'
 let g:wiki_mappings_local = {
     \ '<plug>(wiki-graph-find-backlinks)' : '<Leader>wlb',
     \ '<plug>(wiki-link-toggle)' : '<Leader>wlt',
@@ -139,7 +142,7 @@ let g:taskwiki_sort_order = 'status-,urgency-'
 """"""""""""""""""""""
 " Markdown indentation
 au BufRead,BufNewFile *.md filetype indent off
-"autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufRead,BufNewFile *.md setlocal spell
 
 " Transparent bg to match terminal, comes at end to ensure hi isn't overwritten
 hi Normal guibg=NONE ctermbg=NONE
