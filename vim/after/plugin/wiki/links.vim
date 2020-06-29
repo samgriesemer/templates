@@ -78,6 +78,7 @@ function! WrapLink(path)
 
     " return final concatenation
     return '['.dname.']('.relpath.')'
+    "return '[['.dname.']]'
 endfunction 
 
 " Function to specificly handle FZF completed links in the mappings below

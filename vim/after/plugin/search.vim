@@ -25,7 +25,7 @@ function FzfGrepPreview(cmd, pat, loc, qry, bng)
     \   }, 'down:50%:wrap'), a:bng)
 endfunction
 
-" DirFzfFiles - search current directory wiki filenames and go to file
+" DirFzfFiles - search current directory filenames and go to file
 command! -bang -nargs=? -complete=dir DirFzfFiles
     \ call fzf#vim#files('.', fzf#vim#with_preview({'right':'50%'}, 'down:50%:wrap'), <bang>0)
 
