@@ -118,6 +118,9 @@ let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 
+"" Base markdown settings (tpope) ""
+let g:markdown_folding=1
+
 "" Wiki ""
 let g:wiki_root = '~/Nextcloud/sitefiles'
 "let g:wiki_root = '~/Documents/notes'
@@ -136,13 +139,15 @@ let g:wiki_mappings_local = {
 "" Taskwiki config ""
 let g:taskwiki_markup_syntax = 'markdown'
 let g:taskwiki_sort_order = 'status-,urgency-'
+let g:taskwiki_dont_preserve_folds = 1
 
 """"""""""""""""""""""
 " POST PLUGIN CONFIG "
 """"""""""""""""""""""
 " Markdown indentation
 au BufRead,BufNewFile *.md filetype indent off
-autocmd BufRead,BufNewFile *.md setlocal spell
+au BufRead,BufNewFile *.md setlocal spell
+au FileType markdown setlocal foldlevel=99
 
 " Transparent bg to match terminal, comes at end to ensure hi isn't overwritten
 hi Normal guibg=NONE ctermbg=NONE
@@ -183,3 +188,4 @@ nmap <Leader>we :WikiCreateFile<CR>
 
 " tabular formatted tables
 inoremap <silent> <Bar>   <Bar><Esc>:call TableAlign()<CR>a
+
