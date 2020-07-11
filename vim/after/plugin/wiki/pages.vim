@@ -10,6 +10,11 @@ function! WikiCreateFile()
     " query user for filename (relative to wiki root)
     let fname = input('Enter new file name: ')
 
+    if empty(fname)
+        echom "wiki error: File name must not be empty"
+        return
+    endif
+
     " basic processing to convert input to filename
     let fname = StringToFname(fname)
     let fname = fname.'.md'

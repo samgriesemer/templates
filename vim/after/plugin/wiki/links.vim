@@ -77,8 +77,16 @@ function! WrapLink(path)
     let dname = FnameToString(fname)
 
     " return final concatenation
-    return '['.dname.']('.relpath.')'
-    "return '[['.dname.']]'
+    "return '['.dname.']('.relpath.')'
+    let linktext = '[['.dname.']]'
+
+    " compute whether or not to push link to next line
+    if getcurpos()[2]+strlen(linktext) > &tw
+        let spacing = repeat(' ', &tw - getcurpos()[2])
+        let linktext = spacing.linktext
+    endif
+
+    return linktext
 endfunction 
 
 " Function to specificly handle FZF completed links in the mappings below

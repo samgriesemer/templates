@@ -41,7 +41,7 @@ set comments+=n:#
 "      \ contained transparent contains=NONE conceal
 "syntax match wikiLinkWikiConceal /\]\]/
 "      \ contained transparent contains=NONE conceal
-"syntax match wikiLinkMdConceal /\[/
+""syntax match wikiLinkMdConceal /\[/
 "      \ contained transparent contains=NONE conceal
 "syntax match wikiLinkMdConceal /\]([^\\]\{-})/
 "      \ contained transparent contains=NONE conceal
@@ -49,3 +49,9 @@ set comments+=n:#
 "      \ contained transparent contains=NONE conceal
 "syntax match wikiLinkRefConceal /\]\[[^\\\[\]]\{-}\]/
 "      \ contained transparent contains=NONE conceal
+"
+"highlight default link wikiLinkUrl ModeMsg
+"highlight default link wikiLinkWiki Underlined
+"highlight default link wikiLinkMd Underlined
+"
+"unlet s:group s:rx s:contained

@@ -11,6 +11,7 @@ set background=dark
 set conceallevel=2
 set timeoutlen=600
 set ttimeoutlen=50
+"set clipboard=unnamedplus
 
 " text wrapping config
 set wrap
@@ -122,8 +123,8 @@ let g:vim_markdown_new_list_item_indent = 0
 let g:markdown_folding=1
 
 "" Wiki ""
-let g:wiki_root = '~/Nextcloud/sitefiles'
-"let g:wiki_root = '~/Documents/notes'
+"let g:wiki_root = '~/Nextcloud/sitefiles'
+let g:wiki_root = '~/Documents/notes'
 "let g:wiki_link_target_type = 'md'
 "let g:wiki_link_extension = 'md'
 let g:wiki_filetypes = ['md']
@@ -134,6 +135,9 @@ let g:wiki_mappings_local = {
     \ '<plug>(wiki-graph-find-backlinks)' : '<Leader>wlb',
     \ '<plug>(wiki-link-toggle)' : '<Leader>wlt',
     \ '<plug>(wiki-page-toc)' : '<Leader>wpt'
+    \ }
+let g:wiki_journal = {
+    \ 'name': ''
     \ }
 
 "" Taskwiki config ""
