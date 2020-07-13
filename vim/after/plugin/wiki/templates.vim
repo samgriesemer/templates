@@ -86,7 +86,7 @@ function LastMod()
   else
     let l = line("$")
   endif
-  exe "1," . l . "g/Modified: /s/Modified: .*/Modified: " .
-  \ strftime("%Y-%m-%d")
+  exe "1," . l . "g/Modified: /s/Modified: .*/Modified: " . strftime("%Y-%m-%d")
+  exe "1," . l . "g/modified: /s/modified: .*/modified: " . strftime("%Y-%m-%d")
   call winrestview(save_view)
 endfunction
