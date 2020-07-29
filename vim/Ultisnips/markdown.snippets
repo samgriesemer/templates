@@ -52,4 +52,16 @@ source: ${2:`!v getreg("*")`}
 $0
 endsnippet
 
+snippet wz "WikiZettel"
+---
+title: `!p snip.rv=fname_to_str(snip.basename)`
+created: `date +%Y-%m-%d`
+modified: `date +%Y-%m-%d`
+datelink: [[`date +%Y-%m-%d`]]
+type: zettel
+summary: $1
+---
+
+$0
+endsnippet
 # vim:ft=snippets:
