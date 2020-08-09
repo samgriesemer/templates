@@ -103,8 +103,14 @@ endfunction
 
 " wiki subsystem link completion mappings (does not appear to work well when
 " using a general function or defining these as commands)
+"imap <expr> [[ fzf#vim#complete(fzf#wrap({
+"    \ 'source': 'find '.g:wiki_root.' -exec realpath --relative-to '.g:wiki_root.' \{\} \;',
+"    \ 'reducer': function('<sid>handle_completed_link'),
+"    \ 'options': '--bind=ctrl-d:print-query --multi --reverse --margin 15%,0',
+"    \ 'right':    40}))
+
 imap <expr> [[ fzf#vim#complete(fzf#wrap({
-    \ 'source': 'find '.g:wiki_root.' -exec realpath --relative-to '.g:wiki_root.' \{\} \;',
+    \ 'source': 'ls '.g:wiki_root,
     \ 'reducer': function('<sid>handle_completed_link'),
     \ 'options': '--bind=ctrl-d:print-query --multi --reverse --margin 15%,0',
     \ 'right':    40}))

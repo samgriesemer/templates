@@ -18,15 +18,12 @@ set wrap
 set linebreak
 set showbreak=..
 set breakindent
-
 set autoindent
 set textwidth=90
 set display+=lastline
 filetype plugin indent off
 
 colorscheme solarized
-"au BufEnter *.md colorscheme mdsolarized
-"colorscheme gruvbox
 
 syntax enable
 set spell
@@ -37,6 +34,7 @@ set spelllang=en_us
   "autocmd!
   "autocmd ColorScheme solarized hi SpellBad cterm=underline
 "augroup END
+
 
 """"""""""""""""""""""""
 " PLUG PACKAGE MANAGER "
@@ -77,11 +75,8 @@ Plug 'samgriesemer/vim-markdown'
 Plug 'dkarter/bullets.vim'
 
 "" Wiki ""
-"Plug 'lervag/wiki.vim'
+Plug 'samgriesemer/wiki.vim'
 Plug 'samgriesemer/vim-roam'
-
-"" Vim-taskwarrior ""
-Plug 'blindFS/vim-taskwarrior'
 
 "" Taskwiki ""
 Plug 'samgriesemer/taskwiki'
@@ -90,12 +85,20 @@ Plug 'samgriesemer/taskwiki'
 Plug '~/.fzf' "make sure fzf installed (along with ripgrep)
 Plug 'junegunn/fzf.vim'
 
+"" coc.nvim ""
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['json', 'lua', 'vim', 'python']}
+Plug 'psf/black'
+
 " end plugin list, initialize system
 call plug#end()
+
 
 """"""""""""""""""
 " PACKAGE CONFIG "
 """"""""""""""""""
+"" Airline config ""
+let g:airline#extensions#coc#enabled = 1
+
 "" UltiSnips configuration ""
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
@@ -123,27 +126,42 @@ let g:vim_markdown_new_list_item_indent = 0
 let g:markdown_folding=1
 
 "" Wiki ""
-"let g:wiki_root = '~/Nextcloud/sitefiles'
 let g:wiki_root = '~/Documents/notes'
-"let g:wiki_link_target_type = 'md'
-"let g:wiki_link_extension = 'md'
 let g:wiki_filetypes = ['md']
 let g:wiki_write_on_follow = 1
 let g:wiki_map_create_page = 'StringToFname'
+let g:wiki_write_on_nav = 1
 "let g:wiki_map_link_create  = 'FnameToString'
 let g:wiki_mappings_local = {
     \ '<plug>(wiki-graph-find-backlinks)' : '<Leader>wlb',
     \ '<plug>(wiki-link-toggle)' : '<Leader>wlt',
     \ '<plug>(wiki-page-toc)' : '<Leader>wpt'
-    \ }
+\ }
 let g:wiki_journal = {
-    \ 'name': ''
-    \ }
+    \ 'name' : '',
+    \ 'frequency' : 'daily',
+    \ 'date_format' : {
+    \   'daily' : '%Y-%m-%d',
+    \   'weekly' : '%Y_w%V',
+    \   'monthly' : '%Y_m%m',
+    \ },
+\}
 
 "" Taskwiki config ""
 let g:taskwiki_markup_syntax = 'markdown'
 let g:taskwiki_sort_order = 'status-,urgency-'
 let g:taskwiki_dont_preserve_folds = 1
+
+"" coc.nvim ""
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 
 """"""""""""""""""""""
 " POST PLUGIN CONFIG "
@@ -152,24 +170,31 @@ let g:taskwiki_dont_preserve_folds = 1
 au BufRead,BufNewFile *.md filetype indent off
 au BufRead,BufNewFile *.md setlocal spell
 au FileType markdown setlocal foldlevel=99
+highlight clear LineNr
+highlight clear SignColumn
 
 " Transparent bg to match terminal, comes at end to ensure hi isn't overwritten
-hi Normal guibg=NONE ctermbg=NONE
+"hi Normal guibg=NONE ctermbg=NONE
 
 " Italic comments
 highlight Comment cterm=italic
+let &l:comments='fb:* [ ],fb:- [ ],nb:>,'.&comments
 
-" redefine <Leader> to <space>
-let mapleader = "\<Space>"
 
 """""""""""""""""""
 " CUSTOM MAPPINGS "
 """""""""""""""""""
+" redefine <Leader> to <space>
+let mapleader = "\<Space>"
+
 " enforce no arrows
 noremap <Up>    <Nop>
 noremap <Down>  <Nop>
 noremap <Left>  <Nop>
 noremap <Right> <Nop>
+
+" NERDTree map
+nmap <Leader>d :NERDTreeToggle<CR>
 
 " general search
 nmap <Leader>df :DirFzfFiles<CR>
@@ -179,7 +204,7 @@ nmap <Leader>dl :DirFzfLines<CR>
 nmap <Leader>wf :WikiFzfFiles<CR>
 nmap <Leader>wl :WikiFzfLines<CR>
 "nmap <Leader>wb :WikiFzfBacklinks<CR>
-nmap <Leader>wb :BacklinkBuffer<CR>
+nmap <Leader>wb :RoamBacklinkBuffer<CR>
 nmap <Leader>wu :WikiFzfUnlinks<CR>
 
 " wiki link completion defined in after/.../links.vim due to issues
