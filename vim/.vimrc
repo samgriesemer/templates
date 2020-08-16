@@ -13,7 +13,6 @@ set timeoutlen=600
 set ttimeoutlen=50
 "set clipboard=unnamedplus
 
-" text wrapping config
 set wrap
 set linebreak
 set showbreak=..
@@ -22,7 +21,6 @@ set autoindent
 set textwidth=90
 set display+=lastline
 filetype plugin indent off
-
 colorscheme solarized
 
 syntax enable
@@ -30,10 +28,10 @@ set spell
 set spelllang=en_us
 
 " fix spelling error highlights
-"augroup spell_colors
-  "autocmd!
-  "autocmd ColorScheme solarized hi SpellBad cterm=underline
-"augroup END
+augroup spell_colors
+  autocmd!
+  autocmd ColorScheme solarized hi SpellBad cterm=underline
+augroup END
 
 
 """"""""""""""""""""""""
@@ -61,7 +59,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-"" Solarize color scheme ""
+"" Solarized color scheme ""
 Plug 'altercation/vim-colors-solarized'
 
 "" GruvBox color scheme ""
@@ -87,7 +85,7 @@ Plug 'junegunn/fzf.vim'
 
 "" coc.nvim ""
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['json', 'lua', 'vim', 'python']}
-Plug 'psf/black'
+"Plug 'psf/black'
 
 " end plugin list, initialize system
 call plug#end()
@@ -128,10 +126,9 @@ let g:markdown_folding=1
 "" Wiki ""
 let g:wiki_root = '~/Documents/notes'
 let g:wiki_filetypes = ['md']
-let g:wiki_write_on_follow = 1
 let g:wiki_map_create_page = 'StringToFname'
+let g:wiki_map_visit_link = 'StringToFname'
 let g:wiki_write_on_nav = 1
-"let g:wiki_map_link_create  = 'FnameToString'
 let g:wiki_mappings_local = {
     \ '<plug>(wiki-graph-find-backlinks)' : '<Leader>wlb',
     \ '<plug>(wiki-link-toggle)' : '<Leader>wlt',
@@ -174,7 +171,7 @@ highlight clear LineNr
 highlight clear SignColumn
 
 " Transparent bg to match terminal, comes at end to ensure hi isn't overwritten
-"hi Normal guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE
 
 " Italic comments
 highlight Comment cterm=italic
@@ -207,13 +204,8 @@ nmap <Leader>wl :WikiFzfLines<CR>
 nmap <Leader>wb :RoamBacklinkBuffer<CR>
 nmap <Leader>wu :WikiFzfUnlinks<CR>
 
-" wiki link completion defined in after/.../links.vim due to issues
-
 " wiki in-page TOC search
 nmap <Leader>wt :WikiFzfToc<CR>
-
-" wiki create file
-nmap <Leader>we :WikiCreateFile<CR>
 
 " tabular formatted tables
 inoremap <silent> <Bar>   <Bar><Esc>:call TableAlign()<CR>a
