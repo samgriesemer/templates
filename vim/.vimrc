@@ -20,6 +20,7 @@ set breakindent
 set autoindent
 set textwidth=90
 set display+=lastline
+set fillchars+=vert:\▏
 filetype plugin indent off
 colorscheme solarized
 
@@ -126,23 +127,23 @@ let g:markdown_folding=1
 "" Wiki ""
 let g:wiki_root = '~/Documents/notes'
 let g:wiki_filetypes = ['md']
-let g:wiki_map_create_page = 'StringToFname'
-let g:wiki_map_visit_link = 'StringToFname'
-let g:wiki_write_on_nav = 1
+"let g:wiki_map_create_page = 'StringToFname'
+"let g:wiki_map_visit_link = 'StringToFname'
+"let g:wiki_write_on_nav = 1
 let g:wiki_mappings_local = {
     \ '<plug>(wiki-graph-find-backlinks)' : '<Leader>wlb',
     \ '<plug>(wiki-link-toggle)' : '<Leader>wlt',
     \ '<plug>(wiki-page-toc)' : '<Leader>wpt'
 \ }
-let g:wiki_journal = {
-    \ 'name' : '',
-    \ 'frequency' : 'daily',
-    \ 'date_format' : {
-    \   'daily' : '%Y-%m-%d',
-    \   'weekly' : '%Y_w%V',
-    \   'monthly' : '%Y_m%m',
-    \ },
-\}
+"let g:wiki_journal = {
+"    \ 'name' : '',
+"    \ 'frequency' : 'daily',
+"    \ 'date_format' : {
+"    \   'daily' : '%Y-%m-%d',
+"    \   'weekly' : '%Y_w%V',
+"    \   'monthly' : '%Y_m%m',
+"    \ },
+"\}
 
 "" Taskwiki config ""
 let g:taskwiki_markup_syntax = 'markdown'
@@ -150,6 +151,7 @@ let g:taskwiki_sort_order = 'status-,urgency-'
 let g:taskwiki_dont_preserve_folds = 1
 
 "" coc.nvim ""
+let g:coc_disable_startup_warning = 1
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
@@ -169,9 +171,10 @@ au BufRead,BufNewFile *.md setlocal spell
 au FileType markdown setlocal foldlevel=99
 highlight clear LineNr
 highlight clear SignColumn
+highlight VertSplit guibg=bg ctermbg=bg 
 
 " Transparent bg to match terminal, comes at end to ensure hi isn't overwritten
-hi Normal guibg=NONE ctermbg=NONE
+"hi Normal guibg=NONE ctermbg=NONE
 
 " Italic comments
 highlight Comment cterm=italic
