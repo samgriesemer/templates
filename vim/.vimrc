@@ -18,6 +18,7 @@ set linebreak
 set showbreak=..
 set breakindent
 set autoindent
+set incsearch
 set textwidth=90
 set display+=lastline
 set fillchars+=vert:\▏
