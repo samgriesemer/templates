@@ -28,12 +28,7 @@ colorscheme solarized
 syntax enable
 set spell
 set spelllang=en_us
-
-" fix spelling error highlights
-augroup spell_colors
-  autocmd!
-  autocmd ColorScheme solarized hi SpellBad cterm=underline
-augroup END
+highlight SpellBad cterm=underline
 
 
 """"""""""""""""""""""""
