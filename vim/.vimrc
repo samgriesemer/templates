@@ -11,7 +11,6 @@ set background=dark
 set conceallevel=2
 set timeoutlen=600
 set ttimeoutlen=50
-"set clipboard=unnamedplus
 
 set wrap
 set linebreak
@@ -36,6 +35,9 @@ highlight SpellBad cterm=underline
 """"""""""""""""""""""""
 " begin plugin list
 call plug#begin('~/.vim/plugged')
+
+"" vim-fugitive ""
+Plug 'tpope/vim-fugitive'
 
 "" UltiSnips engine and snippets ""
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -92,7 +94,7 @@ call plug#end()
 " PACKAGE CONFIG "
 """"""""""""""""""
 "" Airline config ""
-let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#coc#enabled=1
 
 "" UltiSnips configuration ""
 let g:UltiSnipsExpandTrigger = '<tab>'
@@ -112,10 +114,10 @@ let g:tex_conceal='abdmg'
 let NERDTreeMinimalUI=1
 
 "" Vim-markdown plugin config ""
-let g:vim_markdown_math = 1
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_auto_insert_bullets = 0
-let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_math=1
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_auto_insert_bullets=0
+let g:vim_markdown_new_list_item_indent=0
 
 "" Base markdown settings (tpope) ""
 let g:markdown_folding=1
@@ -125,21 +127,12 @@ let g:wiki_root = '~/Documents/notes'
 let g:wiki_filetypes = ['md']
 "let g:wiki_map_create_page = 'StringToFname'
 "let g:wiki_map_visit_link = 'StringToFname'
-"let g:wiki_write_on_nav = 1
+let g:wiki_write_on_nav = 1
 let g:wiki_mappings_local = {
     \ '<plug>(wiki-graph-find-backlinks)' : '<Leader>wlb',
     \ '<plug>(wiki-link-toggle)' : '<Leader>wlt',
     \ '<plug>(wiki-page-toc)' : '<Leader>wpt'
 \ }
-"let g:wiki_journal = {
-"    \ 'name' : '',
-"    \ 'frequency' : 'daily',
-"    \ 'date_format' : {
-"    \   'daily' : '%Y-%m-%d',
-"    \   'weekly' : '%Y_w%V',
-"    \   'monthly' : '%Y_m%m',
-"    \ },
-"\}
 
 "" Taskwiki config ""
 let g:taskwiki_markup_syntax = 'markdown'
