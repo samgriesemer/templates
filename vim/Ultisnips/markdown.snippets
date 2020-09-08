@@ -45,8 +45,12 @@ created: `date +%Y-%m-%d`
 modified: `date +%Y-%m-%d`
 datelink: [[`date +%Y-%m-%d`]]
 type: feed
-tags: $1
-source: ${2:`!v getreg("*")`}
+media: $1
+source: $2
+volume: $3
+files:
+tags: $4
+url: ${5:`!v getreg("*")`}
 ---
 
 $0
