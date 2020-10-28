@@ -110,7 +110,7 @@ endfunction
 "    \ 'right':    40}))
 
 imap <expr> [[ fzf#vim#complete(fzf#wrap({
-    \ 'source': 'ls '.g:wiki_root,
+    \ 'source': 'cd '.g:wiki_root.' && find *', 
     \ 'reducer': function('<sid>handle_completed_link'),
     \ 'options': '--bind=ctrl-d:print-query --multi --reverse --margin 15%,0',
     \ 'right':    40}))
