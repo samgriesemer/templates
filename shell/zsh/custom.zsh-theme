@@ -9,7 +9,7 @@
 typeset -A host_repr
 
 # translate hostnames into shortened, colorcoded strings
-host_repr=('cloud-smgr' "%{$fg[magenta]%}cloud" 'smgr-ubuntu' "%{$fg_bold[blue]%}home")
+host_repr=('cloud-smgr' "%Bcloud%b" 'smgr-ubuntu' "%{$fg[blue]%}home")
 
 # local time, color coded by last return code
 time_enabled="%(?.%{$fg[green]%}.%{$fg[red]%})%D{%H:%M}%{$reset_color%}"
@@ -26,7 +26,7 @@ local host="@${host_repr[$HOST]:-$HOST}%{$reset_color%}"
 # Compacted $PWD
 local pwd="%{$fg[blue]%}%30<...<%~%<<%{$reset_color%}"
 
-PROMPT='${time} ${user}${host} ${pwd} '
+PROMPT='[${time}][${user}${host}][${pwd}]%(!.#.$) '
 
 # i would prefer 1 icon that shows the "most drastic" deviation from HEAD,
 # but lets see how this works out
@@ -36,7 +36,7 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%} %{$fg[yellow]%}?%{$fg[green]%}%{$rese
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
 
 # elaborate exitcode on the right when >0
-return_code_enabled="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+return_code_enabled="%(?..%{$fg[red]%}-%?-%{$reset_color%})"
 return_code_disabled=
 return_code=$return_code_enabled
 
