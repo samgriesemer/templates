@@ -9,7 +9,7 @@
 typeset -A host_repr
 
 # translate hostnames into shortened, colorcoded strings
-host_repr=('cloud-smgr' "%Bcloud%b" 'smgr-ubuntu' "%{$fg[blue]%}home")
+host_repr=('cloud-smgr' "%Bcloud%b" 'smgr-ubuntu' "%Bhome%b" 'smgr.mbp-lan' "%Bmbp%b")
 
 # local time, color coded by last return code
 time_enabled="%(?.%{$fg[green]%}.%{$fg[red]%})%D{%H:%M}%{$reset_color%}"
