@@ -105,7 +105,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 "" VimTex configuration ""
 let g:tex_flavor='latex'
-let g:vimtex_view_method='skim'
+let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 
 "" TeX-conceal configuration ""
@@ -134,6 +134,16 @@ let g:wiki_mappings_local = {
     \ '<plug>(wiki-link-toggle)' : '<Leader>wlt',
     \ '<plug>(wiki-page-toc)' : '<Leader>wpt'
 \ }
+
+let g:wiki_file_open = 'WikiFileOpen'
+
+function! WikiFileOpen(...) abort dict
+  if self.path =~# 'pdf$'
+    silent execute '!zathura' fnameescape(self.path) '&'
+    return 1
+  endif
+  return 0
+endfunction
 
 "" Taskwiki config ""
 let g:taskwiki_markup_syntax = 'markdown'
@@ -164,7 +174,7 @@ highlight clear SignColumn
 highlight VertSplit guibg=bg ctermbg=bg 
 
 " Transparent bg to match terminal, comes at end to ensure hi isn't overwritten
-"hi Normal guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE
 
 " Italic comments
 highlight Comment cterm=italic
@@ -203,3 +213,5 @@ nmap <Leader>wt :WikiFzfToc<CR>
 " tabular formatted tables
 inoremap <silent> <Bar>   <Bar><Esc>:call TableAlign()<CR>a
 
+" copy map
+vmap <C-c> "+y
