@@ -17,7 +17,7 @@ modified: `date +%Y-%m-%d`
 type: journal
 ---
 
-# Todo | due:`date +%Y-%m-%d`T23:59:59
+# Todo | due:`date +%Y-%m-%d`T23:59:59 -event
 
 # Events | +event status:pending
 
@@ -66,6 +66,18 @@ modified: `date +%Y-%m-%d`
 datelink: [[`date +%Y-%m-%d`]]
 type: zettel
 summary: $1
+---
+
+$0
+endsnippet
+
+snippet wn "WikiTaskNote"
+---
+title: `!p snip.rv=fname_to_str(snip.basename)`
+created: `date +%Y-%m-%d`
+modified: `date +%Y-%m-%d`
+datelink: [[`date +%Y-%m-%d`]]
+type: tasknote
 ---
 
 $0
