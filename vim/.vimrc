@@ -19,6 +19,7 @@ set breakindent
 set autoindent
 set incsearch
 set hlsearch
+set shortmess-=S
 set textwidth=90
 set display+=lastline
 set fillchars+=vert:\▏
@@ -67,7 +68,7 @@ Plug 'morhetz/gruvbox'
 
 "" Markdown ""
 Plug 'godlygeek/tabular'
-Plug 'samgriesemer/vim-markdown'
+Plug 'samgriesemer/vim-roam-md'
 
 "" Lists ""
 Plug 'dkarter/bullets.vim'
@@ -77,7 +78,7 @@ Plug 'samgriesemer/wiki.vim'
 Plug 'samgriesemer/vim-roam'
 
 "" Taskwiki ""
-Plug 'samgriesemer/taskwiki'
+Plug 'samgriesemer/vim-roam-task'
 
 "" fzf ""
 Plug '~/.fzf' "make sure fzf installed (along with ripgrep)
@@ -215,3 +216,8 @@ inoremap <silent> <Bar>   <Bar><Esc>:call TableAlign()<CR>a
 
 " copy map
 vmap <C-c> "+y
+
+" open map (temporary, needs to be a site spec in vim-roam)
+"nmap <Leader>wo :call system('firefox -new-tab "dev.smgr.io/' . expand('%:p:t:r') . '"')<CR>
+nmap <Leader>wo :call system('firefox -new-tab "localhost:8000/' . expand('%:p:t:r') . '.html"')<CR>
+

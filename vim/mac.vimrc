@@ -19,6 +19,7 @@ set breakindent
 set autoindent
 set incsearch
 set hlsearch
+set shortmess-=S
 set textwidth=90
 set display+=lastline
 set fillchars+=vert:\▏
@@ -67,7 +68,7 @@ Plug 'morhetz/gruvbox'
 
 "" Markdown ""
 Plug 'godlygeek/tabular'
-Plug 'samgriesemer/vim-markdown'
+Plug 'samgriesemer/vim-roam-md'
 
 "" Lists ""
 Plug 'dkarter/bullets.vim'
@@ -77,7 +78,7 @@ Plug 'samgriesemer/wiki.vim'
 Plug 'samgriesemer/vim-roam'
 
 "" Taskwiki ""
-Plug 'samgriesemer/taskwiki'
+Plug 'samgriesemer/vim-roam-task'
 
 "" fzf ""
 Plug '~/.fzf' "make sure fzf installed (along with ripgrep)
@@ -105,7 +106,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 "" VimTex configuration ""
 let g:tex_flavor='latex'
-let g:vimtex_view_method='skim'
+let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 
 "" TeX-conceal configuration ""
