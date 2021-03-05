@@ -263,4 +263,5 @@ inoremap <silent> <Bar>   <Bar><Esc>:call TableAlign()<CR>a
 vmap <C-c> "+y
 
 " open map (temporary, needs to be a site spec in vim-roam)
-nmap <Leader>wo :call system('/Applications/Firefox.app/Contents/MacOS/firefox -new-tab "https://dev.smgr.io/' . expand('%:p:t:r') . '"')<CR>
+nmap <Leader>wo :call system('firefox -new-tab "localhost:8000/' . expand('%:p:t:r') . '.html"')<CR>
+

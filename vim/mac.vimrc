@@ -130,11 +130,11 @@ let g:wiki_filetypes = ['md']
 "let g:wiki_map_create_page = 'StringToFname'
 "let g:wiki_map_visit_link = 'StringToFname'
 let g:wiki_write_on_nav = 1
-let g:wiki_mappings_local = {
-    \ '<plug>(wiki-graph-find-backlinks)' : '<Leader>wlb',
-    \ '<plug>(wiki-link-toggle)' : '<Leader>wlt',
-    \ '<plug>(wiki-page-toc)' : '<Leader>wpt'
-\ }
+"let g:wiki_mappings_local = {
+"    \ '<plug>(wiki-graph-find-backlinks)' : '<Leader>wlb',
+"    \ '<plug>(wiki-link-toggle)' : '<Leader>wlt',
+"    \ '<plug>(wiki-page-toc)' : '<Leader>wpt'
+"\ }
 
 let g:wiki_file_open = 'WikiFileOpen'
 
@@ -153,14 +153,59 @@ let g:taskwiki_dont_preserve_folds = 1
 
 "" coc.nvim ""
 let g:coc_disable_startup_warning = 1
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"nmap <silent> [g <Plug>(coc-diagnostic-prev)
+"nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"
+"" GoTo code navigation.
+"nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+
+let g:coc_global_extensions = ['coc-pyright', 'coc-tsserver', 'coc-html'
+            "\ 'coc-eslint', 'coc-prettier',
+            "\ 'coc-css', 'coc-json', 'coc-yaml'
+            \ ]
+
+" Better display for messages
+set cmdheight=2
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes
+let mapleader = "\<Space>"
+
+" Use `lp` and `ln` for navigate diagnostics
+nmap <silent> <leader>lp <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>ln <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> <leader>ld <Plug>(coc-definition)
+nmap <silent> <leader>lt <Plug>(coc-type-definition)
+nmap <silent> <leader>li <Plug>(coc-implementation)
+nmap <silent> <leader>lf <Plug>(coc-references)
+
+" Remap for rename current word
+nmap <leader>lr <Plug>(coc-rename)
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+"autocmd CursorHold * silent call CocActionAsync('highlight')
+
+"""
 
 
 """"""""""""""""""""""
@@ -202,14 +247,14 @@ nmap <Leader>df :DirFzfFiles<CR>
 nmap <Leader>dl :DirFzfLines<CR>
 
 " wiki search
-nmap <Leader>wf :WikiFzfFiles<CR>
-nmap <Leader>wl :WikiFzfLines<CR>
+"nmap <Leader>wf :WikiFzfFiles<CR>
+"nmap <Leader>wl :WikiFzfLines<CR>
 "nmap <Leader>wb :WikiFzfBacklinks<CR>
-nmap <Leader>wb :RoamBacklinkBuffer<CR>
-nmap <Leader>wu :WikiFzfUnlinks<CR>
+"nmap <Leader>wb :RoamBacklinkBuffer<CR>
+"nmap <Leader>wu :WikiFzfUnlinks<CR>
 
 " wiki in-page TOC search
-nmap <Leader>wt :WikiFzfToc<CR>
+"nmap <Leader>wt :WikiFzfToc<CR>
 
 " tabular formatted tables
 inoremap <silent> <Bar>   <Bar><Esc>:call TableAlign()<CR>a
